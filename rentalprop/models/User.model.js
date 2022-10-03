@@ -12,8 +12,15 @@ const userSchema = new Schema(
       unique: true,
       required: true,
     },
-    password: String,
-    role: String,
+    password: {
+      type: String,
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: ["owner", "tenant", "admin"],
+      default: "owner",
+    },
     firstName: String,
     lastName: String,
     address: String,
