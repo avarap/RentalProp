@@ -33,6 +33,8 @@ router.post("/signup", isLoggedOut, (req, res) => {
     });
   }
 
+  //just to try branches
+
   //   ! This use case is using a regular expression to control for special characters and min length
   /*
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
@@ -79,7 +81,10 @@ router.post("/signup", isLoggedOut, (req, res) => {
         if (error.code === 11000) {
           return res
             .status(400)
-            .render("auth/signup", { errorMessage: "Username need to be unique. The username you chose is already in use." });
+            .render("auth/signup", {
+              errorMessage:
+                "Username need to be unique. The username you chose is already in use.",
+            });
         }
         return res
           .status(500)
@@ -106,7 +111,9 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   if (password.length < 8) {
     return res
       .status(400)
-      .render("auth/login", { errorMessage: "Your password needs to be at least 8 characters long." });
+      .render("auth/login", {
+        errorMessage: "Your password needs to be at least 8 characters long.",
+      });
   }
 
   // Search the database for a user with the username submitted in the form
@@ -148,7 +155,7 @@ router.get("/logout", isLoggedIn, (req, res) => {
         .status(500)
         .render("auth/logout", { errorMessage: err.message });
     }
-    
+
     res.redirect("/");
   });
 });
