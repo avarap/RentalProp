@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const propertySchema = new mongoose.Schema(
+const incidentSchema = new mongoose.Schema(
   {
     subject: String,
     description: String,
@@ -14,6 +14,6 @@ const propertySchema = new mongoose.Schema(
   }
 );
 
-const Property = mongoose.model("Property", propertySchema);
+const Incident = mongoose.model("Incident", incidentSchema);
 
-module.exports = { Property };
+module.exports = Incident;

@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>New Property</h1>
+
+  {{#if session.isAuthenticated }}
+  <p>{{user.username}}</p>
+  {{else}}
+  <p>no</p>
+  {{/if}}
+  <p>{{user.username}}</p>
+  <p>{{session.isAuthenticated}}</p>
+</div>
