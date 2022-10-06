@@ -79,12 +79,10 @@ router.post("/signup", isLoggedOut, (req, res) => {
             .render("auth/signup", { errorMessage: error.message });
         }
         if (error.code === 11000) {
-          return res
-            .status(400)
-            .render("auth/signup", {
-              errorMessage:
-                "Username need to be unique. The username you chose is already in use.",
-            });
+          return res.status(400).render("auth/signup", {
+            errorMessage:
+              "Username need to be unique. The username you chose is already in use.",
+          });
         }
         return res
           .status(500)
@@ -109,11 +107,9 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   // Here we use the same logic as above
   // - either length based parameters or we check the strength of a password
   if (password.length < 8) {
-    return res
-      .status(400)
-      .render("auth/login", {
-        errorMessage: "Your password needs to be at least 8 characters long.",
-      });
+    return res.status(400).render("auth/login", {
+      errorMessage: "Your password needs to be at least 8 characters long.",
+    });
   }
 
   // Search the database for a user with the username submitted in the form
@@ -136,7 +132,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
 
         req.session.user = user;
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
-        return res.redirect("/");
+        return res.redirect("/auth/userProfile");
       });
     })
 
@@ -156,8 +152,33 @@ router.get("/logout", isLoggedIn, (req, res) => {
         .render("auth/logout", { errorMessage: err.message });
     }
 
-    res.redirect("/");
+    res.redirect("/auth/login");
   });
+});
+
+// UserProfile route
+router.get("/userProfile", (req, res) => {
+  console.log(req.session.user);
+  res.render("users/user-profile", { userInSession: req.session.user });
+});
+
+router.get("/userProfile/edit", (req, res) => {
+  res.render("users/user-profile-edit", { userInSession: req.session.user });
+});
+
+// POST route to actually make updates on a specific user
+router.post("/userProfile/edit", async (req, res, next) => {
+  const { firstName, lastName, address, phone } = req.body;
+  console.log(req.body);
+  const userId = req.session.user._id;
+  console.log(userId);
+
+  await User.findByIdAndUpdate(
+    userId,
+    { firstName, lastName, address, phone },
+    { new: true }
+  );
+  res.redirect("/userProfile");
 });
 
 module.exports = router;
