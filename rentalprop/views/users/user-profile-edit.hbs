@@ -1,0 +1,25 @@
+<h2>Edit {{userInSession.username}} profile</h2>
+
+<form action="/auth/userProfile/edit" method="post">
+  <label>
+    First Name:
+    <input type="text" name="firstName" value="{{userInSession.firstName}}" />
+  </label>
+
+  <label>
+    Last Name:
+    <input type="text" name="lastName" value="{{userInSession.lastName}}" />
+  </label>
+
+  <label>
+    Address:
+    <input type="text" name="address" value="{{userInSession.address}}" />
+  </label>
+
+  <label>
+    Phone:
+    <input type="tel" name="phone" value="{{userInSession.phone}}" />
+  </label>
+
+  <button type="submit">Update profile</button>
+</form>

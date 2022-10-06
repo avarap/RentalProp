@@ -1,0 +1,22 @@
+{{#if userInSession}}
+  {{#if userInSession.firstName}}
+    <h2>Welcome, {{userInSession.firstName}} {{userInSession.lastName}}!</h2>
+  {{else}}
+    <h2>Welcome, {{userInSession.username}}!</h2>
+  {{/if}}
+
+  <p>This is your profile page!</p>
+
+  <p>Name: {{userInSession.firstName}} {{userInSession.lastName}}</p>
+  <p>Address: {{userInSession.address}}</p>
+
+  <button>
+    <a href="/auth/userProfile">Reload the page</a>
+  </button>
+  <button>
+    <a href="/auth/userProfile/edit">Edit your profile</a>
+  </button>
+
+{{else}}
+  <p>Still no logged in user, sorry!</p>
+{{/if}}
