@@ -157,13 +157,15 @@ router.get("/logout", isLoggedIn, (req, res) => {
 });
 
 // UserProfile route
-router.get("/userProfile", (req, res) => {
+router.get("/userProfile", async (req, res) => {
   console.log(req.session.user);
-  res.render("users/user-profile", { userInSession: req.session.user });
+  const data = await User.findById(req.session.user._id);
+  res.render("users/user-profile", { userInSession: data });
 });
 
-router.get("/userProfile/edit", (req, res) => {
-  res.render("users/user-profile-edit", { userInSession: req.session.user });
+router.get("/userProfile/edit", async (req, res) => {
+  const data = await User.findById(req.session.user._id);
+  res.render("users/user-profile-edit", { userInSession: data });
 });
 
 // POST route to actually make updates on a specific user
@@ -178,7 +180,7 @@ router.post("/userProfile/edit", async (req, res, next) => {
     { firstName, lastName, address, phone },
     { new: true }
   );
-  res.redirect("/userProfile");
+  res.redirect("/auth/userProfile");
 });
 
 module.exports = router;
