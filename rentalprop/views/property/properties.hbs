@@ -1,4 +1,24 @@
 <div class="container">
   <h1>Property List</h1>
 
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {{#each properties}}
+      <div class="col">
+        <a href="/property/{{_id}}">
+          <div class="card h-100 text-start">
+            {{! <img src="..." class="card-img-top" alt="..." /> }}
+            <div class="card-body">
+              <h4 class="card-title">{{referenceID}}</h4>
+              <p class="card-text " >{{description}}</p>
+
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">{{#if rented}}Rented{{else}}Not Rented{{/if}}</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    {{/each}}
+
+  </div>
 </div>

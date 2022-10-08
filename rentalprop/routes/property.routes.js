@@ -15,13 +15,35 @@ let errorRender = "error";
 router.get("/", isLoggedIn, async (req, res, next) => {
   //console.log(req.session);
   //console.log(req.user);
+  const data = await Property.find({ Owner: req.user._id }, {}, { rented: -1 });
+  Property.count(data);
+  console.log(data.length);
+  if (req.user.role === "Owner") {
+    res.render(templatePath + "/properties", {
+      properties: data,
+      userInSession: req.user,
+    });
+    return;
+  }
+
+  //   try {
+  //     const data = await Property.find();
+  //     res.render(templatePath + "/properties", { properties: data });
+  //   } catch (err) {
+  //     res.render(errorRender);
+  //   }
+});
+
+router.get("/all", isLoggedIn, async (req, res, next) => {
+  //console.log(req.session);
+  //console.log(req.user);
   const data = await Property.find();
   //Property.count(data)
   console.log(data.length);
-  if (req.user.role === "owner") {
+  if (req.user.role === "Owner") {
     res.render(templatePath + "/properties", {
       properties: data,
-      user: req.session.user,
+      userInSession: req.user,
     });
     return;
   }
@@ -35,7 +57,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
 });
 
 router.get("/create", isLoggedIn, async (req, res, next) => {
-  res.render(templatePath + "/create");
+  res.render(templatePath + "/create", { userInSession: req.user });
 });
 
 router.post("/create", isLoggedIn, async (req, res, next) => {
@@ -49,7 +71,7 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
     data.roomNumber = req.body.roomNumber;
     data.price = req.body.price;
 
-    if (req.body.rented) data.rented = false;
+    if (!req.body.rented) data.rented = false;
     else data.rented = true;
 
     data.gallery.push(req.body.gallery);
@@ -59,7 +81,16 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
     await data.save();
     res.redirect(redirectPath);
   } catch (err) {
-    //res.render(errorRender);
+    if (err.code === 11000) {
+      //Ask how to send a error message without cleaning the page
+      return res.status(400).render("property/create", {
+        userInSession: req.user,
+        errorMessage:
+          "ReferenceId need to be unique. The ReferenceId you chose is already in use.",
+      });
+    }
+    // if (err.message.includes("duplicate key")) //Ask how to send a error message without cleaning the page
+    //   return res.status(400).render(templatePath + "/create", { userInSession: req.user, errorMessage: "ReferenceId already exists!" });
     console.log(err);
     console.log(req.body);
   }
@@ -67,10 +98,14 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
 
 router.get("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Property.findById(req.params.id);
-    await data.populate("Owner");
+    const data = await Property.find({ Owner: req.user._id, _id: req.id });
+    //findById(req.params.id);
+    //await data.populate("Owner");
 
-    res.render(templatePath + "/property-details", { property: data });
+    res.render(templatePath + "/property-details", {
+      property: data,
+      userInSession: req.user,
+    });
   } catch (err) {
     res.render(errorRender);
   }
