@@ -132,7 +132,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
 
         req.session.user = user;
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
-        return res.redirect("/auth/userProfile");
+        return res.redirect("/auth/ownerDashboard");
       });
     })
 
@@ -181,6 +181,12 @@ router.post("/userProfile/edit", async (req, res, next) => {
     { new: true }
   );
   res.redirect("/auth/userProfile");
+});
+
+// Owner dashboard Route
+router.get("/ownerDashboard", async (req, res) => {
+  const data = await User.findById(req.session.user._id);
+  res.render("users/owner/owner-dashboard", { userInSession: data });
 });
 
 module.exports = router;

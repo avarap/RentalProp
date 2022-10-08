@@ -11,6 +11,10 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,17 +26,15 @@
   </head>
 
   <body class="d-flex h-100">
-    <div
-      class="cover-container d-flex w-100 h-100 mx-auto flex-column text-center"
-    >
+    <div class="cover-container d-flex w-100 mx-auto flex-column text-center">
       {{#if userInSession}}
-        <header class="p-3 text-bg-light">
+        <header class="p-3 text-bg-light shadow-sm">
           <div class="container">
             <div
               class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
             >
               <a
-                href="#"
+                href="/auth/ownerDashboard"
                 class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
               >
                 <img
@@ -40,13 +42,25 @@
                   alt="Rentalpropo logo"
                   width="50"
                 />
+                <h5
+                  class="px-2 py-2 my-auto fw-bold text-dark"
+                >{{appTitle}}</h5>
               </a>
               <ul
                 class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
               >
                 <li><a href="/property/" class="nav-link">Properties</a></li>
-                <li><a href="/property/create" class="nav-link">New property</a></li>
+                <li><a href="/property/create" class="nav-link">Add new property</a></li>
               </ul>
+              <div class="row">
+                <small
+                  class="row hint-text text-end"
+                >{{userInSession.firstName}}
+                  {{userInSession.lastName}}</small>
+                <small
+                  class="row hint-text text-end"
+                >{{userInSession.role}}</small>
+              </div>
               <div class="text-end">
                 <a
                   href="/auth/userProfile"
@@ -61,6 +75,8 @@
             </div>
           </div>
         </header>
+      {{else}}
+        <p>not logged in</p>
       {{/if}}
 
       <div class="w-100 m-auto">
@@ -69,8 +85,8 @@
 
       <footer class="footer py-1">
         <div class="container">
-          <span class="text-muted hint-text"><small>2022 IronHack - Antonio
-              Piquer - João Serafim</small></span>
+          <span class="text-muted hint-text"><small>2022 Rentalprop @ IronHack ·
+              Antonio Piquer - João Serafim</small></span>
         </div>
       </footer>
     </div>
