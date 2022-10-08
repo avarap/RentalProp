@@ -16,7 +16,7 @@ const propertySchema = new mongoose.Schema(
     rented: Boolean,
     gallery: [String],
     Owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    Tenant: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    Tenant: [String],
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
