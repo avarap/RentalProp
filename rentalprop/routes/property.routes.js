@@ -16,7 +16,10 @@ router.get("/", isLoggedIn, async (req, res, next) => {
   console.log(req.session);
   console.log(req.user);
   const data = await Property.find();
-  res.render(templatePath + "/properties", { properties: data, user2: req.session.user });
+  res.render(templatePath + "/properties", {
+    properties: data,
+    user2: req.session.user,
+  });
   //   try {
   //     const data = await Property.find();
   //     res.render(templatePath + "/properties", { properties: data });
@@ -44,6 +47,5 @@ router.get("/:id", isLoggedIn, async (req, res, next) => {
     res.render(errorRender);
   }
 });
-
 
 module.exports = router;

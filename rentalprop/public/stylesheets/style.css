@@ -1,12 +1,61 @@
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: url(/images/background.svg) 0 bottom no-repeat;
+  background-size: 100vw;
 }
 
 a {
-  color: #00b7ff;
+  color: darkred;
+  text-decoration: none;
+}
+
+a:hover {
+  color: crimson !important;
+}
+
+.btn:hover {
+  color: crimson !important;
+}
+
+.nav-link {
+  color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
 
 h1 {
   color: 15px;
+  font-weight: 800;
+}
+
+.hint-text {
+  font-size: 0.7rem;
+}
+
+.form-signin {
+  max-width: 400px;
+  padding: 15px;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.logo {
+  max-width: 50%;
+}
+
+.error {
+  color: red;
+  font-weight: 500;
+  font-size: small;
 }

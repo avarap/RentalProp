@@ -1,14 +1,43 @@
-<form action="/auth/login" method="POST">
-   <label> Username
-      <input type="text" name="username">
-   </label>
-   <label> Password
-      <input type="password" name="password">
-   </label>
+<main class="form-signin w-100 m-auto">
+  <h1>Welcome back!</h1>
+  <h4>Please sign in to your account</h4>
 
-   <button type="submit">Submit</button>
-</form>
+  <form action="/auth/login" method="POST">
+    <div>
+      <input
+        type="email"
+        class="form-control"
+        name="username"
+        placeholder="Email"
+      />
+    </div>
+    <div>
 
-{{#if errorMessage}}
-   {{errorMessage}}
-{{/if}}
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        placeholder="Password"
+      />
+    </div>
+
+    {{#if errorMessage}}
+      <div class="error">
+        {{errorMessage}}
+      </div>
+    {{/if}}
+
+    <button
+      type="submit"
+      class="w-100 btn btn-lg btn-secondary fw-bold border-dark bg-dark mt-5"
+    >Sign In</button>
+  </form>
+
+</main>
+
+<div>
+  <p><small>Don't have an account?
+      <br />
+      <a href="/auth/signup">Click here to Sign up</a>
+    </small></p>
+</div>

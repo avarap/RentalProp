@@ -1,22 +1,22 @@
-{{#if userInSession}}
-  {{#if userInSession.firstName}}
-    <h2>Welcome, {{userInSession.firstName}} {{userInSession.lastName}}!</h2>
+<main class="w-100 m-auto">
+  {{#if userInSession}}
+    {{#if userInSession.firstName}}
+
+      <h2>Welcome</h2>
+      <h4>{{userInSession.firstName}} {{userInSession.lastName}}!</h4>
+    {{else}}
+      <h2>Welcome</h2>
+      <h4>{{userInSession.username}}</h4>
+    {{/if}}
+
+    <p>Address: {{userInSession.address}}</p>
+    <p>Phone: {{userInSession.phone}}</p>
+
+    <button class="btn fw-bold border-dark bg-white mt-5">
+      <a href="/auth/userProfile/edit">Edit your profile</a>
+    </button>
+
   {{else}}
-    <h2>Welcome, {{userInSession.username}}!</h2>
+    <p>Still no logged in user, sorry!</p>
   {{/if}}
-
-  <p>This is your profile page!</p>
-
-  <p>Name: {{userInSession.firstName}} {{userInSession.lastName}}</p>
-  <p>Address: {{userInSession.address}}</p>
-
-  <button>
-    <a href="/auth/userProfile">Reload the page</a>
-  </button>
-  <button>
-    <a href="/auth/userProfile/edit">Edit your profile</a>
-  </button>
-
-{{else}}
-  <p>Still no logged in user, sorry!</p>
-{{/if}}
+</main>
