@@ -5,7 +5,7 @@ const propertySchema = new mongoose.Schema(
     referenceID: {
       type: String,
       required: true,
-      unique: true,
+      
     },
     propertyType: String,
     address: String,
@@ -23,6 +23,8 @@ const propertySchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+propertySchema.index({ referenceID: 1, Owner: 1 }, { unique: true });
 
 const Property = mongoose.model("Property", propertySchema);
 
