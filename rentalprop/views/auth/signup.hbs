@@ -1,14 +1,40 @@
-<form action="/auth/signup" method="POST">
-   <label> email
-      <input type="email" name="username" required>
-   </label>
-   <label> Password
-      <input type="password" name="password" required>
-   </label>
+<main class="form-signin w-100 m-auto">
+  <h1>Welcome!</h1>
+  <h4>Register your account</h4>
 
-   <button type="submit">Submit</button>
-</form>
+  <form action="/auth/signup" method="POST">
 
-{{#if errorMessage}}
-   {{errorMessage}}
-{{/if}}
+    <input
+      type="email"
+      class="form-control"
+      name="username"
+      placeholder="Email"
+      required
+    />
+
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      placeholder="Password"
+      required
+    />
+
+    <button
+      type="submit"
+      class="w-100 btn btn-lg fw-bold border-dark bg-white mt-5"
+    >Sign Up</button>
+  </form>
+
+  {{#if errorMessage}}
+    {{errorMessage}}
+  {{/if}}
+
+</main>
+
+<div>
+  <p><small>Already have an account?
+      <br />
+      <a href="/auth/login">Please Sign in</a>
+    </small></p>
+</div>

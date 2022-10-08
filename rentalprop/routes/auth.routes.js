@@ -101,7 +101,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   if (!username) {
     return res
       .status(400)
-      .render("auth/login", { errorMessage: "Please provide your username." });
+      .render("auth/login", { errorMessage: "Please provide your email." });
   }
 
   // Here we use the same logic as above
@@ -152,7 +152,7 @@ router.get("/logout", isLoggedIn, (req, res) => {
         .render("auth/logout", { errorMessage: err.message });
     }
 
-    res.redirect("/auth/login");
+    res.redirect("/");
   });
 });
 
@@ -168,7 +168,7 @@ router.get("/userProfile/edit", async (req, res) => {
   res.render("users/user-profile-edit", { userInSession: data });
 });
 
-// POST route to actually make updates on a specific user
+// POST route to actually make updates on the user profile
 router.post("/userProfile/edit", async (req, res, next) => {
   const { firstName, lastName, address, phone } = req.body;
   console.log(req.body);

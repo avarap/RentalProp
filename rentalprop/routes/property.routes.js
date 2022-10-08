@@ -19,10 +19,13 @@ router.get("/", isLoggedIn, async (req, res, next) => {
   //Property.count(data)
   console.log(data.length);
   if (req.user.role === "owner") {
-    res.render(templatePath + "/properties", { properties: data, user: req.session.user });
+    res.render(templatePath + "/properties", {
+      properties: data,
+      user: req.session.user,
+    });
     return;
   }
-  
+
   //   try {
   //     const data = await Property.find();
   //     res.render(templatePath + "/properties", { properties: data });
@@ -37,7 +40,6 @@ router.get("/create", isLoggedIn, async (req, res, next) => {
 
 router.post("/create", isLoggedIn, async (req, res, next) => {
   try {
-    
     const data = new Property();
     data.referenceID = req.body.referenceID;
     data.propertyType = req.body.propertyType;
@@ -46,11 +48,9 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
     data.sizeM2 = req.body.sizeM2;
     data.roomNumber = req.body.roomNumber;
     data.price = req.body.price;
-    
-    if (req.body.rented)
-      data.rented = false;
-    else
-      data.rented = true;
+
+    if (req.body.rented) data.rented = false;
+    else data.rented = true;
 
     data.gallery.push(req.body.gallery);
     data.Owner = req.user._id;
@@ -69,7 +69,7 @@ router.get("/:id", isLoggedIn, async (req, res, next) => {
   try {
     const data = await Property.findById(req.params.id);
     await data.populate("Owner");
-    
+
     res.render(templatePath + "/property-details", { property: data });
   } catch (err) {
     res.render(errorRender);
