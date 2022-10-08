@@ -1,7 +1,32 @@
 <div class="w-100 m-auto">
   <h1>New Property</h1>
+  <form action="/property/create" method="POST">
 
-  {{#if user}}
-    <p>{{user}}</p>
-  {{/if}}
+    <label for="referenceID ">referenceID</label>
+    <input type="text" name="referenceID" />
+    <label for="propertyType">propertyType</label>
+    <input type="text" name="propertyType" />
+    <label for="address">address</label>
+    <input type="text" name="address" />
+    <label for="description ">description</label>
+    <input type="text" name="description" />
+    <label for="sizeM2">sizeM2</label>
+    <input type="number" name="sizeM2" />
+    <label for="roomNumber">roomNumber</label>
+    <input type="number" name="roomNumber" />
+    <label for="price">price</label>
+    <input type="number" name="price" />
+    <label for="rented">rented</label>
+    <input type="checkbox" id="rented" name="rented" value="true" />
+    {{! when is selected has property checked }}
+
+    <label for="gallery">gallery</label>
+    <input type="file" name="gallery" />
+    {{! <label for="Owner">Owner</label><input type="text" name="Owner" /> }}
+    {{! <label for="Tenant">Tenant</label><input type="text" name="Tenant" /> }}
+
+    <input type="reset" />
+
+    <button type="submit">Submit</button>
+  </form>
 </div>
