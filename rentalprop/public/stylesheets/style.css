@@ -55,11 +55,9 @@ h1 {
   border-top-right-radius: 0;
 }
 
-.form-control:focus {
-  box-shadow: 0 0 0 0.2rem rgba(220, 20, 60, 0.25);
-}
-
-.form-check-input:focus {
+.form-control:focus,
+.form-check-input:focus,
+.form-select:focus {
   border-color: crimson;
   box-shadow: 0 0 0 0.2rem rgba(220, 20, 60, 0.25);
 }

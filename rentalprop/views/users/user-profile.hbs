@@ -2,10 +2,13 @@
   {{#if userInSession}}
     {{#if userInSession.firstName}}
 
-      <h2>Welcome</h2>
-      <h4>{{userInSession.firstName}} {{userInSession.lastName}}!</h4>
+      <div class="input-group">
+
+        <span class="input-group-text">Name</span>
+        <span class="form-control text-start">{{userInSession.firstName}}
+          {{userInSession.lastName}}</span>
+      </div>
     {{else}}
-      <h2>Welcome</h2>
       <h4>{{userInSession.username}}</h4>
     {{/if}}
 
@@ -13,7 +16,7 @@
     <p>Phone: {{userInSession.phone}}</p>
 
     <button class="btn fw-bold border-dark bg-white mt-5">
-      <a href="/auth/userProfile/edit">Edit your profile</a>
+      <a href="/auth/userProfile/edit">Update your profile</a>
     </button>
 
   {{else}}

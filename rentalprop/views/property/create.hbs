@@ -1,100 +1,111 @@
 <main class="w-100 m-auto">
-  <div
-    class="container p-5 border shadow-sm rounded bg-white m-auto text-start"
-  >
-    <h5>Create new property</h5>
+  <div class="container text-start">
 
-    <form
-      class="row row-cols-lg-auto g-3 align-items-center"
-      action="/property/create"
-      method="POST"
+    <h4 class="fw-bold">Create new property</h4>
+    <div
+      class="container p-5 border shadow-sm rounded bg-white m-auto text-start"
     >
 
-      <div class="col-lg-3 col-md-6">
-        <label for="referenceID ">
-          <span class="hint-text">ReferenceID*</span>
-        </label>
-        <input type="text" class="form-control" name="referenceID" required />
-      </div>
+      <form
+        class="row row-cols-lg-auto g-3 align-items-center"
+        action="/property/create"
+        method="POST"
+      >
 
-      <div class="col-lg-3 col-md-6">
-        <label for="propertyType">
-          <span class="hint-text">Property type*</span>
-        </label>
-        <input type="text" class="form-control" name="propertyType" required />
-      </div>
+        <div class="col-lg-3 col-md-6">
+          <label for="referenceID ">
+            <span class="hint-text">ReferenceID*</span>
+          </label>
+          <input type="text" class="form-control" name="referenceID" required />
+        </div>
 
-      <div class="col-lg-6">
-        <label for="referenceID">
-          <span class="hint-text">Address</span>
-        </label>
-        <input type="text" class="form-control" name="address" />
-      </div>
+        <div class="col-lg-3 col-md-6">
+          <label for="propertyType">
+            <span class="hint-text">Property type*</span>
+          </label>
+          <select name="propertyType" class="form-select" required>
+            <option value="Room">Room</option>
+            <option value="Apartment" selected>Apartment</option>
+            <option value="Commercial">Comercial</option>
+            <option value="Storage">Storage</option>
+            <option value="Parking Space">Parking Space</option>
+            <option value="Mobile Home">Mobile Home</option>
+            <option value="villa">Villa</option>
+          </select>
+        </div>
 
-      <div class="col-lg-12">
-        <label for="description"><span
-            class="hint-text"
-          >Description</span></label>
-        <textarea
-          type="text"
-          class="form-control"
-          name="description"
-        ></textarea>
-      </div>
+        <div class="col-lg-6">
+          <label for="referenceID">
+            <span class="hint-text">Address</span>
+          </label>
+          <input type="text" class="form-control" name="address" />
+        </div>
 
-      <div class="col-lg-2 col-md-4 col-sm-4">
-        <label for="sizeM2"><span class="hint-text">Size (m²)</span></label>
-        <input type="number" class="form-control" name="sizeM2" />
-      </div>
+        <div class="col-lg-12">
+          <label for="description"><span
+              class="hint-text"
+            >Description</span></label>
+          <textarea
+            type="text"
+            class="form-control"
+            name="description"
+          ></textarea>
+        </div>
 
-      <div class="col-lg-2 col-md-4 col-sm-4">
-        <label for="roomNumber"><span class="hint-text">Number of rooms</span></label>
-        <input type="number" class="form-control" name="roomNumber" />
-      </div>
+        <div class="col-lg-2 col-md-4 col-sm-4">
+          <label for="sizeM2"><span class="hint-text">Size (m²)</span></label>
+          <input type="number" class="form-control" name="sizeM2" />
+        </div>
 
-      <div class="col-lg-2 col-md-4 col-sm-4">
-        <label for="price"><span class="hint-text">Price</span></label>
-        <input type="number" class="form-control" name="price" />
-      </div>
+        <div class="col-lg-2 col-md-4 col-sm-4">
+          <label for="roomNumber"><span class="hint-text">Number of rooms</span></label>
+          <input type="number" class="form-control" name="roomNumber" />
+        </div>
 
-      <div class="col-lg-6 col-md-12">
-        <label for="gallery"><span class="hint-text">Gallery</span></label>
-        <input
-          type="file"
-          class="form-control"
-          name="gallery"
-          accept="image/png, image/jpeg"
-        />
-      </div>
+        <div class="col-lg-2 col-md-4 col-sm-4">
+          <label for="price"><span class="hint-text">Price</span></label>
+          <input type="number" class="form-control" name="price" />
+        </div>
 
-      {{! when is selected has property checked }}
-      <div class="col-lg-12 col-md-12">
-        <label for="rented"><span class="hint-text">Rented</span></label>
-        <div>
+        <div class="col-lg-6 col-md-12">
+          <label for="gallery"><span class="hint-text">Gallery</span></label>
           <input
-            type="checkbox"
-            class="form-check-input my-2"
-            id="rented"
-            name="rented"
-            value="true"
+            type="file"
+            class="form-control"
+            name="gallery"
+            accept="image/png, image/jpeg"
           />
         </div>
-      </div>
 
-      {{! <label for="Owner">Owner</label><input type="text" name="Owner" /> }}
-      {{! <label for="Tenant">Tenant</label><input type="text" name="Tenant" /> }}
-      <div>
-        <input
-          class="col btn border-dark bg-white"
-          type="reset"
-          value="Reset fields"
-        />
-        <button
-          class="col btn btn-secondary border-dark bg-dark"
-          type="submit"
-        >Create</button>
-      </div>
+        {{! when is selected has property checked }}
+        <div class="col-lg-12 col-md-12">
+          <label for="rented"><span class="hint-text">Rented</span></label>
+          <div>
+            <input
+              type="checkbox"
+              class="form-check-input my-2"
+              id="rented"
+              name="rented"
+              value="true"
+            />
+          </div>
+        </div>
 
-    </form>
+        {{! <label for="Owner">Owner</label><input type="text" name="Owner" /> }}
+        {{! <label for="Tenant">Tenant</label><input type="text" name="Tenant" /> }}
+        <div>
+          <input
+            class="col btn border-dark bg-white"
+            type="reset"
+            value="Reset fields"
+          />
+          <button
+            class="col btn btn-secondary border-dark bg-dark"
+            type="submit"
+          >Create</button>
+        </div>
+
+      </form>
+    </div>
   </div>
 </main>

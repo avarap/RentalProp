@@ -132,7 +132,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
 
         req.session.user = user;
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
-        return res.redirect("/auth/ownerDashboard");
+        return res.redirect("/auth/dashboard");
       });
     })
 
@@ -164,8 +164,8 @@ router.get("/userProfile", async (req, res) => {
 });
 
 router.get("/userProfile/edit", async (req, res) => {
-  const data = await User.findById(req.session.user._id);
-  res.render("users/user-profile-edit", { userInSession: data });
+  const userData = await User.findById(req.session.user._id);
+  res.render("users/user-profile-edit", { userInSession: userData });
 });
 
 // POST route to actually make updates on the user profile
@@ -183,10 +183,17 @@ router.post("/userProfile/edit", async (req, res, next) => {
   res.redirect("/auth/userProfile");
 });
 
-// Owner dashboard Route
-router.get("/ownerDashboard", async (req, res) => {
-  const data = await User.findById(req.session.user._id);
-  res.render("users/owner/owner-dashboard", { userInSession: data });
+// Dashboard Route
+router.get("/dashboard", async (req, res) => {
+  const userData = await User.findById(req.session.user._id);
+  if (userData.role === "Owner") {
+    res.render("users/owner/owner-dashboard", { userInSession: userData });
+    return;
+  }
+  if (userData.role === "Tenant") {
+    res.render("users/owner/tenant-dashboard", { userInSession: userData });
+    return;
+  }
 });
 
 module.exports = router;

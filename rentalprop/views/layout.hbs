@@ -21,6 +21,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
 
   </head>
@@ -34,7 +35,7 @@
               class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
             >
               <a
-                href="/auth/ownerDashboard"
+                href="/auth/dashboard"
                 class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
               >
                 <img
@@ -49,20 +50,15 @@
               <ul
                 class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
               >
-                <li><a
-                    href="/property/properties"
-                    class="nav-link"
-                  >Properties</a></li>
+                <li><a href="/property" class="nav-link">Properties</a></li>
                 <li><a href="/property/create" class="nav-link">Add new property</a></li>
               </ul>
-              <div class="row">
-                <small
-                  class="row hint-text text-end"
-                >{{userInSession.firstName}}
-                  {{userInSession.lastName}}</small>
-                <small
-                  class="row hint-text text-end"
-                >{{userInSession.role}}</small>
+              <div class="d-flex flex-column m-2">
+                <small class="hint-text">{{userInSession.firstName}}
+                  {{userInSession.lastName}}
+                  ·
+                  {{userInSession.role}}</small>
+                <small class="hint-text">{{userInSession.username}}</small>
               </div>
               <div class="text-end">
                 <a
