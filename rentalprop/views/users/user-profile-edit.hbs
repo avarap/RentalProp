@@ -1,80 +1,112 @@
 <main class="w-100 m-auto">
-  <div class="container p-5 border rounded bg-white m-auto text-start">
-    <div class="row text-center">
-      <h4>{{userInSession.firstName}}
-        {{userInSession.lastName}}
-        profile details</h4>
-    </div>
+  <div class="container text-start">
+    <h4 class="fw-bold">Update your profile</h4>
 
-    <form
-      class="row row-cols-lg-auto g-3 align-items-center"
-      action="/auth/userProfile/edit"
-      method="post"
+    <div
+      class="container p-5 border shadow-sm rounded bg-white m-auto text-start"
     >
-      <div class="w-50 col-md-6">
-        <label>
-          <span class="hint-text py-2">First Name*</span>
-        </label>
-        <input
-          type="text"
-          class="form-control"
-          name="firstName"
-          value="{{userInSession.firstName}}"
-          placeholder="First name"
-          required
-        />
+      <div class="row">
       </div>
 
-      <div class="w-50 col-md-6">
-        <label class="hint-text text-start">
-          <span>Last Name*</span>
-        </label>
+      <form
+        class="row row-cols-lg-auto g-3 align-items-center"
+        action="/auth/userProfile/edit"
+        method="post"
+      >
+        <div class="col-lg-2">
+          <label>
+            <span class="hint-text">First Name*</span>
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            name="firstName"
+            value="{{userInSession.firstName}}"
+            placeholder="First name"
+            required
+          />
+        </div>
 
-        <input
-          type="text"
-          class="form-control"
-          name="lastName"
-          value="{{userInSession.lastName}}"
-          placeholder="Last name"
-          required
-        />
-      </div>
+        <div class="col-lg-2">
+          <label class="hint-text">
+            <span>Last Name*</span>
+          </label>
 
-      <div class="col-lg-3">
-        <label class="hint-text text-start">
-          <span>Phone number</span>
-        </label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastName"
+            value="{{userInSession.lastName}}"
+            placeholder="Last name"
+            required
+          />
+        </div>
 
-        <input
-          type="phone"
-          class="form-control mb-3"
-          name="phone"
-          value="{{userInSession.phone}}"
-          placeholder="Phone number"
-        />
-      </div>
+        <div class="col-lg-5">
+          <label class="hint-text">
+            <span>Email*</span>
+          </label>
+          <input
+            type="email"
+            class="form-control text-muted"
+            name="email"
+            value="{{userInSession.username}}"
+            placeholder="Email"
+            disabled
+          />
+        </div>
 
-      <div class="col-lg-9">
-        <label class="hint-text text-start">
-          <span>Address</span>
-        </label>
+        <div class="col-lg-3">
+          <label class="hint-text">
+            <span>Last Name*</span>
+          </label>
 
-        <input
-          type="text"
-          class="form-control mb-3"
-          name="address"
-          value="{{userInSession.address}}"
-          placeholder="Address"
-        />
-      </div>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            value="{{userInSession.password}}"
+            placeholder="Password"
+            required
+          />
+        </div>
 
-      <button
-        class="btn fw-bold border-dark bg-white m-auto"
-        type="submit"
-      >Update</button>
+        <div class="col-lg-3">
+          <label class="hint-text">
+            <span>Phone number</span>
+          </label>
 
-    </form>
+          <input
+            type="phone"
+            class="form-control mb-3"
+            name="phone"
+            value="{{userInSession.phone}}"
+            placeholder="Phone number"
+          />
+        </div>
 
+        <div class="col-lg-9">
+          <label class="hint-text">
+            <span>Address</span>
+          </label>
+
+          <input
+            type="text"
+            class="form-control mb-3"
+            name="address"
+            value="{{userInSession.address}}"
+            placeholder="Address"
+          />
+        </div>
+
+        <button
+          class="btn fw-bold border-dark bg-white m-auto"
+          type="submit"
+        >Update</button>
+
+      </form>
+
+    </div>
   </div>
 
 </main>

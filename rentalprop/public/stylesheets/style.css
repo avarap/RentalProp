@@ -24,6 +24,11 @@ a:hover {
   color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
 
+.bg-grey:hover {
+  background-color: rgb(248, 249, 250);
+  transition: all 0.2s ease-in;
+}
+
 h1 {
   color: 15px;
   font-weight: 800;
@@ -50,6 +55,18 @@ h1 {
   border-top-right-radius: 0;
 }
 
+.form-control:focus,
+.form-check-input:focus,
+.form-select:focus {
+  border-color: crimson;
+  box-shadow: 0 0 0 0.2rem rgba(220, 20, 60, 0.25);
+}
+
+.form-check-input:checked {
+  border-color: crimson;
+  background-color: crimson;
+}
+
 .logo {
   max-width: 50%;
 }
@@ -58,4 +75,8 @@ h1 {
   color: red;
   font-weight: 500;
   font-size: small;
+}
+
+svg {
+  fill: darkred;
 }

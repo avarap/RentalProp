@@ -15,11 +15,14 @@ let errorRender = "error";
 router.get("/", isLoggedIn, async (req, res, next) => {
   //console.log(req.session);
   //console.log(req.user);
-  const data = await Property.find({ Owner: req.user._id },{},{rented:-1});
+  const data = await Property.find({ Owner: req.user._id }, {}, { rented: -1 });
   Property.count(data);
   console.log(data.length);
-  if (req.user.role === "owner") {
-    res.render(templatePath + "/properties", { properties: data, userInSession: req.user });
+  if (req.user.role === "Owner") {
+    res.render(templatePath + "/properties", {
+      properties: data,
+      userInSession: req.user,
+    });
     return;
   }
 
@@ -37,8 +40,11 @@ router.get("/all", isLoggedIn, async (req, res, next) => {
   const data = await Property.find();
   //Property.count(data)
   console.log(data.length);
-  if (req.user.role === "owner") {
-    res.render(templatePath + "/properties", { properties: data, userInSession: req.user });
+  if (req.user.role === "Owner") {
+    res.render(templatePath + "/properties", {
+      properties: data,
+      userInSession: req.user,
+    });
     return;
   }
 
@@ -77,7 +83,11 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
   } catch (err) {
     if (err.code === 11000) {
       //Ask how to send a error message without cleaning the page
-      return res.status(400).render("property/create", { userInSession: req.user, errorMessage: "ReferenceId need to be unique. The ReferenceId you chose is already in use." });
+      return res.status(400).render("property/create", {
+        userInSession: req.user,
+        errorMessage:
+          "ReferenceId need to be unique. The ReferenceId you chose is already in use.",
+      });
     }
     // if (err.message.includes("duplicate key")) //Ask how to send a error message without cleaning the page
     //   return res.status(400).render(templatePath + "/create", { userInSession: req.user, errorMessage: "ReferenceId already exists!" });
@@ -88,11 +98,14 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
 
 router.get("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Property.find({ Owner: req.user._id, _id:req.id });
+    const data = await Property.find({ Owner: req.user._id, _id: req.id });
     //findById(req.params.id);
     //await data.populate("Owner");
 
-    res.render(templatePath + "/property-details", { property: data, userInSession: req.user });
+    res.render(templatePath + "/property-details", {
+      property: data,
+      userInSession: req.user,
+    });
   } catch (err) {
     res.render(errorRender);
   }
