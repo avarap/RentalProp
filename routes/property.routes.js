@@ -16,7 +16,10 @@ router.get("/", isLoggedIn, async (req, res, next) => {
   const data = await Property.find({ Owner: req.user._id }, {}, { rented: -1 });
   Property.count(data);
   if (req.user.role === "owner") {
-    res.render(templatePath + "/properties", { properties: data, userInSession: req.user });
+    res.render(templatePath + "/properties", {
+      properties: data,
+      userInSession: req.user,
+    });
     return;
   }
 
@@ -31,7 +34,10 @@ router.get("/", isLoggedIn, async (req, res, next) => {
 router.get("/all", isLoggedIn, async (req, res, next) => {
   const data = await Property.find();
   if (req.user.role === "owner") {
-    res.render(templatePath + "/properties", { properties: data, userInSession: req.user });
+    res.render(templatePath + "/properties", {
+      properties: data,
+      userInSession: req.user,
+    });
     return;
   }
 
@@ -107,8 +113,14 @@ router.post("/:id/delete", isLoggedIn, (req, res, next) => {
 
 router.get("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Property.findOne({ Owner: req.user._id, _id: req.params.id });
-    res.render(templatePath + "/property-details", { property: data, userInSession: req.user });
+    const data = await Property.findOne({
+      Owner: req.user._id,
+      _id: req.params.id,
+    });
+    res.render(templatePath + "/property-details", {
+      property: data,
+      userInSession: req.user,
+    });
   } catch (err) {
     res.render(errorRender);
   }
@@ -116,10 +128,13 @@ router.get("/:id", isLoggedIn, async (req, res, next) => {
 
 router.post("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Property.findOne({ Owner: req.user._id, _id: req.params.id });
+    const data = await Property.findOne({
+      Owner: req.user._id,
+      _id: req.params.id,
+    });
     console.log(data);
-    console.log(req.body,"body");
-    console.log(req.params,"params");
+    console.log(req.body, "body");
+    console.log(req.params, "params");
     data.propertyType = req.body.propertyType;
     data.address = req.body.address;
     data.description = req.body.description;

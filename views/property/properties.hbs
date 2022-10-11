@@ -6,10 +6,16 @@
       <div class="col mx-auto">
         <div class="card h-100 text-start">
           {{#if gallery.0}}
-            <img src="{{gallery.0}}" class="card-img-top" alt="{{referenceID}}" />
+            <img
+              src="{{gallery.0}}"
+              class="card-img-top"
+              alt="{{referenceID}}"
+            />
           {{/if}}
           <div class="card-body">
-            <h5 class="fw-bold"><a href="/property/{{_id}}">{{propertyType}}</a></h5>
+            <h5 class="fw-bold"><a
+                href="/property/{{_id}}"
+              >{{propertyType}}</a></h5>
             <p class="fs-6"><small>RefID. {{referenceID}}</small></p>
             <p class="card-text">{{description}}</p>
           </div>
