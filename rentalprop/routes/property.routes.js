@@ -70,7 +70,11 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
   } catch (err) {
     if (err.code === 11000) {
       //Ask how to send a error message without cleaning the page
-      return res.status(400).render("property/create", { userInSession: req.user, errorMessage: "ReferenceId need to be unique. The ReferenceId you chose is already in use." });
+      return res.status(400).render("property/create", {
+        userInSession: req.user,
+        errorMessage:
+          "ReferenceId need to be unique. The ReferenceId you chose is already in use.",
+      });
     }
     // if (err.message.includes("duplicate key")) //Ask how to send a error message without cleaning the page
     //   return res.status(400).render(templatePath + "/create", { userInSession: req.user, errorMessage: "ReferenceId already exists!" });
