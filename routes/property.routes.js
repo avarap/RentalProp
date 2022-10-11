@@ -13,22 +13,24 @@ let redirectPath = "/property";
 let errorRender = "error";
 
 router.get("/", isLoggedIn, async (req, res, next) => {
-  const data = await Property.find({ Owner: req.user._id }, {}, { rented: -1 });
-  Property.count(data);
-  if (req.user.role === "owner") {
-    res.render(templatePath + "/properties", {
-      properties: data,
-      userInSession: req.user,
-    });
-    return;
+  try {
+    const data = await Property.find(
+      { Owner: req.user._id },
+      {},
+      { rented: -1 }
+    );
+    //Property.count(data);
+    if (req.user.role === "owner") {
+      res.render(templatePath + "/properties", {
+        properties: data,
+        userInSession: req.user,
+      });
+      return;
+    }
+    res.render(templatePath + "/properties", { properties: data });
+  } catch (err) {
+    res.render(errorRender);
   }
-
-  //   try {
-  //     const data = await Property.find();
-  //     res.render(templatePath + "/properties", { properties: data });
-  //   } catch (err) {
-  //     res.render(errorRender);
-  //   }
 });
 
 router.get("/all", isLoggedIn, async (req, res, next) => {
