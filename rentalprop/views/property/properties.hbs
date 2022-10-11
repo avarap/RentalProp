@@ -6,11 +6,12 @@
       <div class="col">
         <a href="/property/{{_id}}">
           <div class="card h-100 text-start">
-            {{! <img src="..." class="card-img-top" alt="..." /> }}
+            {{#if gallery.[0]}}
+              <img src="{{gallery.[0]}}" class="card-img-top" alt="{{referenceID}}" />
+            {{/if}}
             <div class="card-body">
               <h4 class="card-title">{{referenceID}}</h4>
-              <p class="card-text " >{{description}}</p>
-
+              <p class="card-text text-capitalize">{{description}}</p>
             </div>
             <div class="card-footer">
               <small class="text-muted">{{#if rented}}Rented{{else}}Not Rented{{/if}}</small>
