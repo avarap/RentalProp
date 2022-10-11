@@ -5,12 +5,13 @@
     {{#each properties}}
       <div class="col mx-auto">
         <div class="card h-100 text-start">
-          {{! <img src="..." class="card-img-top" alt="..." /> }}
+          {{#if gallery.0}}
+            <img src="{{gallery.0}}" class="card-img-top" alt="{{referenceID}}" />
+          {{/if}}
           <div class="card-body">
             <h5 class="fw-bold"><a href="/property/{{_id}}">{{propertyType}}</a></h5>
-            <p class="fs-6"><small>RefID. {{referenceID}}</p></small>
+            <p class="fs-6"><small>RefID. {{referenceID}}</small></p>
             <p class="card-text">{{description}}</p>
-
           </div>
           <div class="card-footer">
             <small class="text-muted">{{#if rented}}Rented{{else}}Not Rented{{/if}}</small>
