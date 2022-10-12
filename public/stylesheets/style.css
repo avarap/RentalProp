@@ -80,3 +80,9 @@ h1 {
 svg {
   fill: darkred;
 }
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
