@@ -187,11 +187,11 @@ router.post("/userProfile/edit", async (req, res, next) => {
 router.get("/dashboard", isLoggedIn, async (req, res, next) => {
   try {
     const userData = await User.findById(req.session.user._id);
-    if (userData.role === "Owner") {
+    if (userData.role === "owner") {
       res.render("users/owner/owner-dashboard", { userInSession: userData });
       return;
     }
-    if (userData.role === "Tenant") {
+    if (userData.role === "tenant") {
       res.render("users/owner/tenant-dashboard", { userInSession: userData });
       return;
     }
