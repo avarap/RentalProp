@@ -10,7 +10,7 @@
 
       <form
         class="row row-cols-lg-auto g-3 align-items-center"
-        action="/auth/userProfile/edit"
+        action="/userProfile/edit"
         method="post"
       >
         <div class="col-lg-2">
@@ -52,13 +52,13 @@
             name="email"
             value="{{userInSession.username}}"
             placeholder="Email"
-            disabled
+            disabled readonly
           />
         </div>
 
         <div class="col-lg-3">
           <label class="hint-text">
-            <span>Last Name*</span>
+            <span>Password*</span>
           </label>
 
           <input
