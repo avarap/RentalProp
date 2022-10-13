@@ -15,10 +15,18 @@ let errorRender = "error";
 
 router.get("/", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Property.find({ Owner: req.user._id }, {}, { rented: -1 });
+    const userData = await User.findById(req.session.user._id);
+    const data = await Property.find(
+      { Owner: req.user._id },
+      {},
+      { rented: -1 }
+    );
     //Property.count(data);
-    if (req.user.role === "owner") {
-      res.render(templatePath + "/properties", { properties: data, userInSession: req.user });
+    if (userData.role === "owner") {
+      res.render(templatePath + "/properties", {
+        properties: data,
+        userInSession: userData,
+      });
       return;
     }
     res.render(templatePath + "/properties", { properties: data });
@@ -70,7 +78,11 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
         const fileName = req.files.gallery.name;
         const fileNameExt = fileName.split(".").slice(-1);
         const newFilename = uuidv4();
-        const fileLoc = path.join("public", "uploads", newFilename + "." + fileNameExt);
+        const fileLoc = path.join(
+          "public",
+          "uploads",
+          newFilename + "." + fileNameExt
+        );
         await req.files.gallery.mv(fileLoc);
         data.gallery = [];
         data.gallery.push(newFilename + "." + fileNameExt);
@@ -89,7 +101,8 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
       //Ask how to send a error message without cleaning the page
       return res.status(400).render("property/create", {
         userInSession: req.user,
-        errorMessage: "ReferenceId need to be unique. The ReferenceId you chose is already in use.",
+        errorMessage:
+          "ReferenceId need to be unique. The ReferenceId you chose is already in use.",
       });
     }
     // if (err.message.includes("duplicate key")) //Ask how to send a error message without cleaning the page

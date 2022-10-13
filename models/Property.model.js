@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+// const autoIncrement = require("mongoose-auto-increment");
 
 const propertySchema = new mongoose.Schema(
   {
@@ -23,6 +24,10 @@ const propertySchema = new mongoose.Schema(
   }
 );
 
+// propertySchema.plugin(autoIncrement.plugin, {
+//   model: "Property",
+//   field: "referenceID",
+// });
 propertySchema.index({ referenceID: 1, Owner: 1 }, { unique: true });
 
 const Property = mongoose.model("Property", propertySchema);
