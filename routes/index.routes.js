@@ -5,9 +5,7 @@ const router = require("express").Router();
 
 /* GET home page */
 router.get("/", isLoggedIn, (req, res, next) => {
-
-  res.redirect("/property");
-
+  res.redirect("/dashboard");
 });
 
 module.exports = router;

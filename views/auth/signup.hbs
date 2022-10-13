@@ -1,6 +1,14 @@
 <main class="form-signin w-100 m-auto">
-  <h1>Welcome!</h1>
-  <h4>Register your account</h4>
+  <div class="text-center mb-5">
+    <img
+      class="mx-auto d-block logo"
+      src="/images/logo-transparent.png"
+      alt="house logo"
+    />
+    <h1>{{appTitle}}</h1>
+  </div>
+  <h2 class="fw-bold">Welcome!</h2>
+  <h5>Register your account</h5>
 
   <form action="/auth/signup" method="POST">
 
@@ -20,6 +28,6 @@
 <div>
   <p><small>Already have an account?
       <br />
-      <a href="/auth/login">Please Sign in</a>
+      <a href="/auth/login">Please Login</a>
     </small></p>
 </div>

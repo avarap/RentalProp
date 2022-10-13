@@ -26,7 +26,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
 
   if (!username) {
     return res.status(400).render("auth/signup", {
-      errorMessage: "Please provide your username.",
+      errorMessage: "Please provide your email.",
     });
   }
 
@@ -133,7 +133,7 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
 
     req.session.user = user;
     // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
-    return res.redirect("/auth/dashboard");
+    return res.redirect("/dashboard");
 
     // Search the database for a user with the username submitted in the form
   } catch (err) {
@@ -154,24 +154,6 @@ router.get("/logout", isLoggedIn, (req, res) => {
 
     res.redirect("/");
   });
-});
-
-// Dashboard Route
-router.get("/dashboard", isLoggedIn, async (req, res, next) => {
-  try {
-    const userData = await User.findById(req.session.user._id);
-    if (userData.role === "owner") {
-      res.render("users/owner/owner-dashboard", { userInSession: userData });
-      return;
-    }
-    if (userData.role === "tenant") {
-      res.render("users/owner/tenant-dashboard", { userInSession: userData });
-      return;
-    }
-    throw new Error("User data has wrong property");
-  } catch (err) {
-    next(err);
-  }
 });
 
 module.exports = router;

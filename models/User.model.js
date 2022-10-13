@@ -23,7 +23,11 @@ const userSchema = new Schema(
     },
     firstName: String,
     lastName: String,
-    address: String,
+    address: {
+      street: String,
+      zip: String,
+      city: String,
+    },
     pictureProfile: String,
     phone: String,
   },

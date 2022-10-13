@@ -1,12 +1,14 @@
 <main class="w-100 m-auto">
-  <div class="container text-start">
-    <h4 class="fw-bold">Update your profile</h4>
-
+  <div class="container p-4 text-start">
+      {{#if userInSession.firstName}}
+        <h4 class="fw-bold">{{userInSession.firstName}}
+          {{userInSession.lastName}}'s profile details</h4>
+      {{else}}
+        <h4 class="fw-bold">{{userInSession.username}}'s profile details</h4>
+      {{/if}}
     <div
-      class="container p-5 border shadow-sm rounded bg-white m-auto text-start"
+      class="container p-4 border shadow-sm rounded bg-white m-auto text-start"
     >
-      <div class="row">
-      </div>
 
       <form
         class="row row-cols-lg-auto g-3 align-items-center"
@@ -52,7 +54,8 @@
             name="email"
             value="{{userInSession.username}}"
             placeholder="Email"
-            disabled readonly
+            disabled
+            readonly
           />
         </div>
 
@@ -67,6 +70,7 @@
             name="password"
             value="{{userInSession.password}}"
             placeholder="Password"
+            disabled
             required
           />
         </div>
@@ -98,11 +102,12 @@
             placeholder="Address"
           />
         </div>
-
+<div>
         <button
-          class="btn fw-bold border-dark bg-white m-auto"
+          class="btn btn-secondary bg-dark"
           type="submit"
         >Update</button>
+</div>
 
       </form>
 

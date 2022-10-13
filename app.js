@@ -26,7 +26,7 @@ const fileUpload = require("express-fileupload");
 app.use(fileUpload({ createParentPath: true }));
 
 const capitalized = require("./utils/capitalized");
-const projectName = "rentalprop";
+const projectName = "rentalProp";
 
 app.locals.appTitle = `${capitalized(projectName)}`;
 
@@ -43,7 +43,7 @@ app.use("/property", propertyRoutes);
 const incidentRoutes = require("./routes/incident.routes");
 app.use("/incident", incidentRoutes);
 
-const userProfileRoutes = require("./routes/userProfile.routes");
+const userProfileRoutes = require("./routes/user.routes");
 app.use("/", userProfileRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
