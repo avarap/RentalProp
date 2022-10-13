@@ -7,5 +7,10 @@ const Property = require("../models/Property.model");
 let templatePath = "./incident";
 let redirectPath = "/incident";
 let errorRender = "error";
+/*
+ subject,description, status,
+    property,
+    user,
+ */
 
 module.exports = router;
