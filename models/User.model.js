@@ -1,10 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-/*
-
-phone
-pictureProfile
-*/
 const userSchema = new Schema(
   {
     username: {
