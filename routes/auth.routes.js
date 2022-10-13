@@ -156,33 +156,6 @@ router.get("/logout", isLoggedIn, (req, res) => {
   });
 });
 
-// UserProfile route
-router.get("/userProfile", async (req, res) => {
-  console.log(req.session.user);
-  const data = await User.findById(req.session.user._id);
-  res.render("users/user-profile", { userInSession: data });
-});
-
-router.get("/userProfile/edit", async (req, res) => {
-  const userData = await User.findById(req.session.user._id);
-  res.render("users/user-profile-edit", { userInSession: userData });
-});
-
-// POST route to actually make updates on the user profile
-router.post("/userProfile/edit", async (req, res, next) => {
-  const { firstName, lastName, address, phone } = req.body;
-  console.log(req.body);
-  const userId = req.session.user._id;
-  console.log(userId);
-
-  await User.findByIdAndUpdate(
-    userId,
-    { firstName, lastName, address, phone },
-    { new: true }
-  );
-  res.redirect("/auth/userProfile");
-});
-
 // Dashboard Route
 router.get("/dashboard", isLoggedIn, async (req, res, next) => {
   try {
