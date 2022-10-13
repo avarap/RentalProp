@@ -22,6 +22,9 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
+const fileUpload = require("express-fileupload");
+app.use(fileUpload({ createParentPath: true }));
+
 const capitalized = require("./utils/capitalized");
 const projectName = "rentalprop";
 
