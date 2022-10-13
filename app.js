@@ -40,6 +40,9 @@ app.use("/property", propertyRoutes);
 const incidentRoutes = require("./routes/incident.routes");
 app.use("/incident", incidentRoutes);
 
+const userProfileRoutes = require("./routes/userProfile.routes");
+app.use("/", userProfileRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 

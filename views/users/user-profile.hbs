@@ -1,4 +1,11 @@
 <main class="w-100 m-auto">
+  <div class="container text-start">
+        <h4 class="fw-bold">User profile</h4>
+
+    <div
+      class="container p-5 border shadow-sm rounded bg-white m-auto text-start"
+    >
+
   {{#if userInSession}}
     {{#if userInSession.firstName}}
 
@@ -16,10 +23,12 @@
     <p>Phone: {{userInSession.phone}}</p>
 
     <button class="btn fw-bold border-dark bg-white mt-5">
-      <a href="/auth/userProfile/edit">Update your profile</a>
+      <a href="/userProfile/edit">Update your profile</a>
     </button>
 
   {{else}}
     <p>Still no logged in user, sorry!</p>
   {{/if}}
+    </div>
+  </div>
 </main>

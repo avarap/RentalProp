@@ -14,7 +14,7 @@ const User = require("../models/User.model");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-router.get("/",isLoggedIn,(req, res) => {
+router.get("/", isLoggedIn, (req, res) => {
   res.render("auth/index");
 });
 router.get("/signup", isLoggedOut, (req, res) => {
@@ -54,7 +54,9 @@ router.post("/signup", isLoggedOut, (req, res) => {
   User.findOne({ username }).then((found) => {
     // If the user is found, send the message username is taken
     if (found) {
-      return res.status(400).render("auth/signup", { errorMessage: "Username already taken." });
+      return res
+        .status(400)
+        .render("auth/signup", { errorMessage: "Username already taken." });
     }
 
     // if user is not found, create a new user - start with hashing the password
@@ -75,14 +77,19 @@ router.post("/signup", isLoggedOut, (req, res) => {
       })
       .catch((error) => {
         if (error instanceof mongoose.Error.ValidationError) {
-          return res.status(400).render("auth/signup", { errorMessage: error.message });
+          return res
+            .status(400)
+            .render("auth/signup", { errorMessage: error.message });
         }
         if (error.code === 11000) {
           return res.status(400).render("auth/signup", {
-            errorMessage: "Username need to be unique. The username you chose is already in use.",
+            errorMessage:
+              "Username need to be unique. The username you chose is already in use.",
           });
         }
-        return res.status(500).render("auth/signup", { errorMessage: error.message });
+        return res
+          .status(500)
+          .render("auth/signup", { errorMessage: error.message });
       });
   });
 });
@@ -95,7 +102,9 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
   const { username, password } = req.body;
 
   if (!username) {
-    return res.status(400).render("auth/login", { errorMessage: "Please provide your email." });
+    return res
+      .status(400)
+      .render("auth/login", { errorMessage: "Please provide your email." });
   }
 
   // Here we use the same logic as above
@@ -109,13 +118,17 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
     const user = await User.findOne({ username });
 
     if (!user) {
-      return res.status(400).render("auth/login", { errorMessage: "Wrong credentials." });
+      return res
+        .status(400)
+        .render("auth/login", { errorMessage: "Wrong credentials." });
     }
 
     // If user is found based on the username, check if the in putted password matches the one saved in the database
     const isSamePassword = await bcrypt.compare(password, user.password);
     if (!isSamePassword) {
-      return res.status(400).render("auth/login", { errorMessage: "Wrong credentials." });
+      return res
+        .status(400)
+        .render("auth/login", { errorMessage: "Wrong credentials." });
     }
 
     req.session.user = user;
@@ -134,34 +147,13 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
 router.get("/logout", isLoggedIn, (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      return res.status(500).render("auth/logout", { errorMessage: err.message });
+      return res
+        .status(500)
+        .render("auth/logout", { errorMessage: err.message });
     }
 
     res.redirect("/");
   });
-});
-
-// UserProfile route
-router.get("/userProfile", async (req, res) => {
-  console.log(req.session.user);
-  const data = await User.findById(req.session.user._id);
-  res.render("users/user-profile", { userInSession: data });
-});
-
-router.get("/userProfile/edit", async (req, res) => {
-  const userData = await User.findById(req.session.user._id);
-  res.render("users/user-profile-edit", { userInSession: userData });
-});
-
-// POST route to actually make updates on the user profile
-router.post("/userProfile/edit", async (req, res, next) => {
-  const { firstName, lastName, address, phone } = req.body;
-  console.log(req.body);
-  const userId = req.session.user._id;
-  console.log(userId);
-
-  await User.findByIdAndUpdate(userId, { firstName, lastName, address, phone }, { new: true });
-  res.redirect("/auth/userProfile");
 });
 
 // Dashboard Route
