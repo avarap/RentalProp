@@ -1,5 +1,6 @@
 const router = require("express").Router();
-
+const path = require("path");
+const uuidv4 = require("uuid").v4;
 const User = require("../models/User.model");
 const Property = require("../models/Property.model");
 //const Incident = require("../models/Incident.model");
@@ -14,17 +15,10 @@ let errorRender = "error";
 
 router.get("/", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Property.find(
-      { Owner: req.user._id },
-      {},
-      { rented: -1 }
-    );
+    const data = await Property.find({ Owner: req.user._id }, {}, { rented: -1 });
     //Property.count(data);
     if (req.user.role === "owner") {
-      res.render(templatePath + "/properties", {
-        properties: data,
-        userInSession: req.user,
-      });
+      res.render(templatePath + "/properties", { properties: data, userInSession: req.user });
       return;
     }
     res.render(templatePath + "/properties", { properties: data });
@@ -33,6 +27,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
   }
 });
 
+/*
 router.get("/all", isLoggedIn, async (req, res, next) => {
   const data = await Property.find();
   if (req.user.role === "owner") {
@@ -50,6 +45,7 @@ router.get("/all", isLoggedIn, async (req, res, next) => {
   //     res.render(errorRender);
   //   }
 });
+*/
 
 router.get("/create", isLoggedIn, async (req, res, next) => {
   res.render(templatePath + "/create", { userInSession: req.user });
@@ -68,8 +64,21 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
 
     if (!req.body.rented) data.rented = false;
     else data.rented = true;
+    
+    try {
+      if (req.files.gallery) {
+        const fileName = req.files.gallery.name;
+        const fileNameExt = fileName.split(".").slice(-1);
+        const newFilename = uuidv4();
+        const fileLoc = path.join("public", "uploads", newFilename + "." + fileNameExt);
+        await req.files.gallery.mv(fileLoc);
+        data.gallery = [];
+        data.gallery.push(newFilename + "." + fileNameExt);
+      }
+    } catch (err) {
+      console.log("No File Uploaded");
+    }
 
-    data.gallery.push(req.body.gallery);
     data.Owner = req.user._id;
     data.Tenant.push(req.body.Tenant);
 
@@ -80,18 +89,17 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
       //Ask how to send a error message without cleaning the page
       return res.status(400).render("property/create", {
         userInSession: req.user,
-        errorMessage:
-          "ReferenceId need to be unique. The ReferenceId you chose is already in use.",
+        errorMessage: "ReferenceId need to be unique. The ReferenceId you chose is already in use.",
       });
     }
     // if (err.message.includes("duplicate key")) //Ask how to send a error message without cleaning the page
     //   return res.status(400).render(templatePath + "/create", { userInSession: req.user, errorMessage: "ReferenceId already exists!" });
-    //console.log(err);
+    console.log(err);
     //console.log(req.body);
   }
 });
 
-router.post("/:id/delete", isLoggedIn, (req, res, next) => {
+router.get("/:id/delete", isLoggedIn, (req, res, next) => {
   const id = req.params.id;
 
   Property.findByIdAndRemove(id)
