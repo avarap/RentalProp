@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const path = require("path");
-const uuidv4 = require("uuid").v4;
+// const path = require("path");
+// const uuidv4 = require("uuid").v4;
 const User = require("../models/User.model");
 const Property = require("../models/Property.model");
 //const Incident = require("../models/Incident.model");
@@ -8,6 +8,8 @@ const Property = require("../models/Property.model");
 // Require necessary (isLoggedOut and isLoggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
+
+const fileUpload = require("../utils/fileUpload");
 
 let templatePath = "./property";
 let redirectPath = "/property";
@@ -74,23 +76,26 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
     if (!req.body.rented) data.rented = false;
     else data.rented = true;
 
-    try {
-      if (req.files.gallery) {
-        const fileName = req.files.gallery.name;
-        const fileNameExt = fileName.split(".").slice(-1);
-        const newFilename = uuidv4();
-        const fileLoc = path.join(
-          "public",
-          "uploads",
-          newFilename + "." + fileNameExt
-        );
-        await req.files.gallery.mv(fileLoc);
-        data.gallery = [];
-        data.gallery.push(newFilename + "." + fileNameExt);
-      }
-    } catch (err) {
-      console.log("No File Uploaded");
-    }
+    // try {
+    //   if (req.files.gallery) {
+    //     const fileName = req.files.gallery.name;
+    //     const fileNameExt = fileName.split(".").slice(-1);
+    //     const newFilename = uuidv4();
+    //     const fileLoc = path.join(
+    //       "public",
+    //       "uploads",
+    //       newFilename + "." + fileNameExt
+    //     );
+    //     await req.files.gallery.mv(fileLoc);
+    //     data.gallery = [];
+    //     data.gallery.push(newFilename + "." + fileNameExt);
+    //   }
+    // } catch (err) {
+    //   console.log("No File Uploaded");
+    // }
+    let fileU = fileUpload(req.files.gallery, req.user._id);
+    data.gallery = [];
+    data.gallery.push(fileU);
 
     data.Owner = req.user._id;
     data.Tenant.push(req.body.Tenant);
