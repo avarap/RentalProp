@@ -4,6 +4,11 @@ const User = require("../models/User.model");
 const Property = require("../models/Property.model");
 const Tenant = require("../models/Tenant.model");
 
+const isLoggedOut = require("../middleware/isLoggedOut");
+const isLoggedIn = require("../middleware/isLoggedIn");
+
+const fileUpload = require("../utils/fileUpload");
+
 let templatePath = "./tenant";
 let redirectPath = "/tenant";
 let errorRender = "error";
