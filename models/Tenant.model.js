@@ -15,8 +15,8 @@ const tenantSchema = new Schema(
     lastName: String,
     pictureProfile: String,
     phone: String,
-    idcard: string,
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    idcard: String,
+    owner: { type: Schema.Types.ObjectId, ref: "User" },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
