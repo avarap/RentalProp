@@ -17,7 +17,6 @@ const tenantSchema = new Schema(
     phone: String,
     idcard: string,
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    property: { type: mongoose.Schema.Types.ObjectId, ref: "Property" },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
