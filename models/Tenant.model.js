@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const { Schema, model } = require("mongoose");
 
 const tenantSchema = new Schema(
@@ -15,7 +16,7 @@ const tenantSchema = new Schema(
     lastName: String,
     pictureProfile: String,
     phone: String,
-    idcard: string,
+    idcard: String,
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     property: { type: mongoose.Schema.Types.ObjectId, ref: "Property" },
   },

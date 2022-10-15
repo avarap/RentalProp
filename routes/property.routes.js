@@ -31,6 +31,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
     }
     res.render(templatePath + "/properties", { properties: data });
   } catch (err) {
+    console.log(err);
     res.render(errorRender);
   }
 });
@@ -118,20 +119,30 @@ router.get("/:id/delete", isLoggedIn, (req, res, next) => {
   Property.findByIdAndRemove(id)
     .then((data) => {
       if (!data) {
-        res.status(404).send({ message: `Cannot delete Property with id=${id}. Maybe Property was not found!`, });
+        res.status(404).send({
+          message: `Cannot delete Property with id=${id}. Maybe Property was not found!`,
+        });
       } else {
-        res.send({ message: "Property was deleted successfully!", });
+        res.send({ message: "Property was deleted successfully!" });
       }
     })
     .catch((err) => {
-      res.status(500).send({ message: "Could not delete Property with id=" + id, });
+      res
+        .status(500)
+        .send({ message: "Could not delete Property with id=" + id });
     });
 });
 
 router.get("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Property.findOne({ Owner: req.user._id, _id: req.params.id, });
-    res.render(templatePath + "/property-details", { property: data, userInSession: req.user, });
+    const data = await Property.findOne({
+      Owner: req.user._id,
+      _id: req.params.id,
+    });
+    res.render(templatePath + "/property-details", {
+      property: data,
+      userInSession: req.user,
+    });
   } catch (err) {
     res.render(errorRender);
   }
@@ -139,7 +150,10 @@ router.get("/:id", isLoggedIn, async (req, res, next) => {
 
 router.post("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Property.findOne({ Owner: req.user._id, _id: req.params.id });
+    const data = await Property.findOne({
+      Owner: req.user._id,
+      _id: req.params.id,
+    });
     console.log(data);
     console.log(req.body, "body");
     console.log(req.params, "params");
