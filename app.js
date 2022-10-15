@@ -43,6 +43,9 @@ app.use("/property", propertyRoutes);
 const incidentRoutes = require("./routes/incident.routes");
 app.use("/incident", incidentRoutes);
 
+const tenantRoutes = require("./routes/tenant.routes");
+app.use("/tenant", incidentRoutes);
+
 const userProfileRoutes = require("./routes/user.routes");
 app.use("/", userProfileRoutes);
 

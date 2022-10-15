@@ -78,7 +78,7 @@ router.get("/:id/delete", isLoggedIn, (req, res, next) => {
 
 router.get("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Property.findOne({ Owner: req.user._id, _id: req.params.id });
+    const data = await Tenant.findOne({ Owner: req.user._id, _id: req.params.id });
     res.render(templatePath + "/property-details", { property: data, userInSession: req.user });
   } catch (err) {
     res.render(errorRender);
