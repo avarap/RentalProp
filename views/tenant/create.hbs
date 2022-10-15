@@ -1,18 +1,14 @@
 <main class="w-100 m-auto">
-  <div class="container p-4 text-start">
-      {{#if userInSession.firstName}}
-        <h4 class="fw-bold">{{userInSession.firstName}}
-          {{userInSession.lastName}}'s profile details</h4>
-      {{else}}
-        <h4 class="fw-bold">{{userInSession.username}}'s profile details</h4>
-      {{/if}}
+  <div class="container text-start">
+
+    <h4 class="fw-bold">Add new tenant</h4>
     <div
-      class="container p-4 border shadow-sm rounded bg-white m-auto text-start"
+      class="container p-5 border shadow-sm rounded bg-white m-auto text-start"
     >
 
       <form
         class="row row-cols-lg-auto g-3 align-items-center"
-        action="/userProfile/edit"
+        action="/tenant"
         method="post"
       >
         <div class="col-lg-2">
@@ -23,8 +19,8 @@
             type="text"
             class="form-control"
             name="firstName"
-            value="{{userInSession.firstName}}"
-            placeholder="First name"
+            value=""
+            placeholder=""
             required
           />
         </div>
@@ -38,8 +34,8 @@
             type="text"
             class="form-control"
             name="lastName"
-            value="{{userInSession.lastName}}"
-            placeholder="Last name"
+            value=""
+            placeholder=""
             required
           />
         </div>
@@ -52,26 +48,22 @@
             type="email"
             class="form-control text-muted"
             name="email"
-            value="{{userInSession.username}}"
-            placeholder="Email"
-            disabled
-            readonly
+            value=""
+            placeholder=""
           />
         </div>
 
         <div class="col-lg-3">
           <label class="hint-text">
-            <span>Password*</span>
+            <span>Id Card*</span>
           </label>
 
           <input
-            type="password"
+            type="text"
             class="form-control"
-            name="password"
-            value="{{userInSession.password}}"
-            placeholder="Password"
-            disabled
-            required
+            name="idCard"
+            value=""
+            placeholder=""
           />
         </div>
 
@@ -84,8 +76,8 @@
             type="phone"
             class="form-control mb-3"
             name="phone"
-            value="{{userInSession.phone}}"
-            placeholder="Phone number"
+            value=""
+            placeholder=""
           />
         </div>
 
@@ -97,9 +89,9 @@
           <input
             type="text"
             class="form-control mb-3"
-            name="street"
-            value="{{userInSession.address.street}}"
-            placeholder="Street"
+            name="address"
+            value=""
+            placeholder=""
           />
         </div>
 
@@ -111,9 +103,9 @@
           <input
             type="text"
             class="form-control mb-3"
-            name="zipCode"
-            value="{{userInSession.address.zipCode}}"
-            placeholder="Zip code"
+            name="address"
+            value=""
+            placeholder=""
           />
         </div>
 
@@ -125,21 +117,20 @@
           <input
             type="text"
             class="form-control mb-3"
-            name="city"
-            value="{{userInSession.address.city}}"
-            placeholder="City"
+            name="address"
+            value=""
+            placeholder=""
           />
         </div>
-<div>
-        <button
-          class="btn btn-secondary bg-dark"
-          type="submit"
-        >Update</button>
-</div>
+        <div>
+          <button
+            class="btn btn-secondary bg-dark"
+            type="submit"
+          >Create</button>
+        </div>
 
       </form>
 
     </div>
   </div>
-
 </main>

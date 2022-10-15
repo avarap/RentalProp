@@ -12,7 +12,6 @@ router.get("/userProfile", async (req, res) => {
       userInSession: userData,
       capitalizedRole,
     });
-    console.log(capitalizedRole);
   } catch (err) {
     res.render("error");
   }
@@ -27,13 +26,22 @@ router.get("/userProfile", async (req, res) => {
 // });
 
 // POST route to actually make updates on the user profile
-router.post("/userProfile/edit", async (req, res, next) => {
-  const { firstName, lastName, address, phone } = req.body;
+router.post("/userProfile/edit", async (req, res) => {
+  const { firstName, lastName, street, zipCode, city, phone } = req.body;
+  const address = { street, zipCode, city };
+  console.log(req.body);
+
   const userId = req.session.user._id;
+  // console.log(address);
   try {
     await User.findByIdAndUpdate(
       userId,
-      { firstName, lastName, address, phone },
+      {
+        firstName,
+        lastName,
+        address,
+        phone,
+      },
       { new: true }
     );
     console.log(userId);
@@ -50,14 +58,14 @@ router.get("/dashboard", isLoggedIn, async (req, res, next) => {
     const userData = await User.findById(req.session.user._id);
     const capitalizedRole = capitalized(userData.role);
     if (userData.role === "owner") {
-      res.render("users/owner/owner-dashboard", {
+      res.render("users/dashboard/owner-dashboard", {
         userInSession: userData,
         capitalizedRole,
       });
       return;
     }
     if (userData.role === "tenant") {
-      res.render("users/owner/tenant-dashboard", {
+      res.render("users/dashboard/tenant-dashboard", {
         userInSession: userData,
         capitalizedRole,
       });

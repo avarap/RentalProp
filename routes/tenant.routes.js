@@ -4,26 +4,33 @@ const User = require("../models/User.model");
 const Property = require("../models/Property.model");
 const Tenant = require("../models/Tenant.model");
 
-const isLoggedOut = require("../middleware/isLoggedOut");
+// const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
-
-const fileUpload = require("../utils/fileUpload");
 
 let templatePath = "./tenant";
 let redirectPath = "/tenant";
 let errorRender = "error";
 
 router.get("/", isLoggedIn, async (req, res, next) => {
+  console.log("helllooo from tenants");
+
   try {
     const data = await Tenant.find({ Owner: req.user._id });
     //Property.count(data);
     if (req.user.role === "owner") {
-      res.render(templatePath + "/tenants", { tenants: data, userInSession: req.user });
+      res.render(templatePath + "/tenants", {
+        tenants: data,
+        userInSession: req.user,
+      });
       return;
     } else {
-      res.render(templatePath + "/tenants", { tenants: data, userInSession: req.user });
+      res.render(templatePath + "/tenants", {
+        tenants: data,
+        userInSession: req.user,
+      });
     }
   } catch (err) {
+    console.log(err);
     res.render(errorRender);
   }
 });
@@ -61,7 +68,10 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
     await data.save();
     return res.redirect(redirectPath);
   } catch (err) {
-      return res.status(400).render("property/create", { userInSession: req.user, errorMessage: "There was an error.",});
+    return res.status(400).render("property/create", {
+      userInSession: req.user,
+      errorMessage: "There was an error.",
+    });
   }
 });
 
@@ -71,20 +81,30 @@ router.get("/:id/delete", isLoggedIn, (req, res, next) => {
   Tenant.findByIdAndRemove(id)
     .then((data) => {
       if (!data) {
-        res.status(404).send({ message: `Cannot delete Property with id=${id}. Maybe Property was not found!` });
+        res.status(404).send({
+          message: `Cannot delete Property with id=${id}. Maybe Property was not found!`,
+        });
       } else {
         res.send({ message: "Property was deleted successfully!" });
       }
     })
     .catch((err) => {
-      res.status(500).send({ message: "Could not delete Property with id=" + id });
+      res
+        .status(500)
+        .send({ message: "Could not delete Property with id=" + id });
     });
 });
 
 router.get("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Tenant.findOne({ Owner: req.user._id, _id: req.params.id });
-    res.render(templatePath + "/property-details", { property: data, userInSession: req.user });
+    const data = await Tenant.findOne({
+      Owner: req.user._id,
+      _id: req.params.id,
+    });
+    res.render(templatePath + "/property-details", {
+      property: data,
+      userInSession: req.user,
+    });
   } catch (err) {
     res.render(errorRender);
   }
@@ -92,7 +112,10 @@ router.get("/:id", isLoggedIn, async (req, res, next) => {
 
 router.post("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Tenant.findOne({ Owner: req.user._id, _id: req.params.id });
+    const data = await Tenant.findOne({
+      Owner: req.user._id,
+      _id: req.params.id,
+    });
     data.email = req.body.email;
     data.firstName = req.body.firstName;
     data.lastName = req.body.lastName;

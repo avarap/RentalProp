@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const { Schema, model } = require("mongoose");
 
 const tenantSchema = new Schema(
@@ -16,7 +17,11 @@ const tenantSchema = new Schema(
     pictureProfile: String,
     phone: String,
     idcard: String,
+<<<<<<< HEAD
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+=======
     owner: { type: Schema.Types.ObjectId, ref: "User" },
+>>>>>>> 49a801877709588514bfa2e362a2c66b5d79e05b
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

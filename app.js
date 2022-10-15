@@ -44,7 +44,7 @@ const incidentRoutes = require("./routes/incident.routes");
 app.use("/incident", incidentRoutes);
 
 const tenantRoutes = require("./routes/tenant.routes");
-app.use("/tenant", incidentRoutes);
+app.use("/tenant", tenantRoutes);
 
 const userProfileRoutes = require("./routes/user.routes");
 app.use("/", userProfileRoutes);
