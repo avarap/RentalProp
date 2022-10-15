@@ -54,9 +54,9 @@ router.post("/signup", isLoggedOut, (req, res) => {
   User.findOne({ username }).then((found) => {
     // If the user is found, send the message username is taken
     if (found) {
-      return res
-        .status(400)
-        .render("auth/signup", { errorMessage: "Username already taken." });
+      return res.status(400).render("auth/signup", {
+        errorMessage: "Email already taken.",
+      });
     }
 
     // if user is not found, create a new user - start with hashing the password
@@ -73,7 +73,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
       .then((user) => {
         // Bind the user to the session object
         req.session.user = user;
-        res.redirect("/");
+        res.redirect("/dashboard");
       })
       .catch((error) => {
         if (error instanceof mongoose.Error.ValidationError) {
@@ -84,7 +84,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
         if (error.code === 11000) {
           return res.status(400).render("auth/signup", {
             errorMessage:
-              "Username need to be unique. The username you chose is already in use.",
+              "Email need to be unique. The email you chose is already in use.",
           });
         }
         return res
@@ -104,23 +104,24 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
   if (!username) {
     return res
       .status(400)
-      .render("auth/login", { errorMessage: "Please provide your email." });
+      .render("auth/login", { errorMessage: "Please enter your email." });
   }
 
   // Here we use the same logic as above
   // - either length based parameters or we check the strength of a password
-  if (password.length < 8) {
-    return res.status(400).render("auth/login", {
-      errorMessage: "Your password needs to be at least 8 characters long.",
-    });
-  }
+  //
+  // if (password.length < 8) {
+  //   return res.status(400).render("auth/login", {
+  //     errorMessage: "Your password needs to be at least 8 characters long.",
+  //   });
+  // }
   try {
     const user = await User.findOne({ username });
 
     if (!user) {
-      return res
-        .status(400)
-        .render("auth/login", { errorMessage: "Wrong credentials." });
+      return res.status(400).render("auth/login", {
+        errorMessage: "Please enter a valid email or sign up.",
+      });
     }
 
     // If user is found based on the username, check if the in putted password matches the one saved in the database
@@ -128,7 +129,7 @@ router.post("/login", isLoggedOut, async (req, res, next) => {
     if (!isSamePassword) {
       return res
         .status(400)
-        .render("auth/login", { errorMessage: "Wrong credentials." });
+        .render("auth/login", { errorMessage: "Wrong password." });
     }
 
     req.session.user = user;
