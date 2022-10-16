@@ -4,25 +4,16 @@ const uuidv4 = require("uuid").v4;
 async function fileUpload(fileData, folder) {
   if (!fileData) return;
   try {
-    const fileName = req.files.pictureProfile.name;
+    const fileName = fileData.name;
     const fileNameExt = fileName.split(".").slice(-1);
     const newFilename = uuidv4();
+    let fileLoc;
     if (!folder) {
-      const fileLoc = path.join(
-        "public",
-        "uploads",
-        newFilename + "." + fileNameExt
-      );
+      fileLoc = path.join("public", "uploads", newFilename + "." + fileNameExt);
     } else {
-      const fileLoc = path.join(
-        "public",
-        "uploads",
-        folder,
-        newFilename + "." + fileNameExt
-      );
+      fileLoc = path.join("public", "uploads", folder, newFilename + "." + fileNameExt);
     }
     await fileData.mv(fileLoc);
-
     if (!folder) {
       return newFilename + "." + fileNameExt;
     } else {

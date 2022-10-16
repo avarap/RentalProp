@@ -1,37 +1,32 @@
 <main class="w-100 m-auto">
   <div class="container p-4 text-start">
     <h4 class="fw-bold">Properties</h4>
-    <div class="row w-100 p-3 m-auto border shadow-sm rounded bg-white">
+    <div class="pb-4 text-center">
+      <a href="/property/create" class="btn btn-secondary bg-dark">Add new property</a>
+    </div>
+    <div class="row w-100 p-3 m-auto border shadow-sm rounded bg-white row-cols-1 row-cols-md-3 g-3">
+      {{! row w-100 p-3 m-auto border shadow-sm rounded bg-white row-cols-1 row-cols-md-2 }}
       {{#if properties}}
-        <div class="col mx-auto">
+        {{#each properties}}
+        <div class="col">
           <div class="card h-100 text-start">
-            {{#each properties}}
-              {{#if gallery.[0]}}
-                <img
-                  src="/uploads/{{gallery.[0]}}"
-                  class="card-img-top"
-                  alt="{{referenceID}}"
-                />
-              {{/if}}
-              <div class="card-body">
-                <h5 class="fw-bold"><a
-                    href="/property/{{_id}}"
-                  >{{propertyType}}</a></h5>
-                <p class="fs-6"><small>RefID. {{referenceID}}</small></p>
-                <p class="card-text">{{description}}</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">{{#if rented}}Rented{{else}}Not Rented{{/if}}</small>
-              </div>
-            {{/each}}
-          </div>
+            {{#if gallery.[0]}}
+              <img src="/uploads/{{gallery.[0]}}" class="card-img-top" alt="{{referenceID}}" />
+            {{/if}}
+            <div class="card-body">
+              <h5 class="fw-bold"><a href="/property/{{_id}}">{{propertyType}}</a></h5>
+              <p class="fs-6"><small>RefID. {{referenceID}}</small></p>
+              <p class="card-text">{{description}}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">{{#if rented}}Rented{{else}}Not Rented{{/if}}</small>
+            </div>
+          </div>        
         </div>
+        {{/each}}
       {{else}}
         <h4 class="fw-bold p-5 text-center"> You don't have any property.</h4>
       {{/if}}
-      <div class="pb-4 text-center">
-      <a href="/property/create" class="btn btn-secondary bg-dark">Add new property</a>
-      </div>
     </div>
   </div>
 </main>

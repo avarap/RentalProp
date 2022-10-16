@@ -18,6 +18,7 @@ const tenantSchema = new Schema(
     phone: String,
     idcard: String,
     owner: { type: Schema.Types.ObjectId, ref: "User" },
+    property: [{ type: Schema.Types.ObjectId, ref: "Property" }],
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
