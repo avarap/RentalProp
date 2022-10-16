@@ -8,9 +8,18 @@ async function fileUpload(fileData, folder) {
     const fileNameExt = fileName.split(".").slice(-1);
     const newFilename = uuidv4();
     if (!folder) {
-      const fileLoc = path.join("public", "uploads", newFilename + "." + fileNameExt);
+      const fileLoc = path.join(
+        "public",
+        "uploads",
+        newFilename + "." + fileNameExt
+      );
     } else {
-      const fileLoc = path.join("public", "uploads", folder, newFilename + "." + fileNameExt);
+      const fileLoc = path.join(
+        "public",
+        "uploads",
+        folder,
+        newFilename + "." + fileNameExt
+      );
     }
     await fileData.mv(fileLoc);
 
@@ -23,3 +32,5 @@ async function fileUpload(fileData, folder) {
     return "";
   }
 }
+
+module.exports = fileUpload;
