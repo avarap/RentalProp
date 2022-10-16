@@ -27,6 +27,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
     }
     res.render(templatePath + "/properties", { properties: data });
   } catch (err) {
+    console.log(err);
     res.render(errorRender);
   }
 });

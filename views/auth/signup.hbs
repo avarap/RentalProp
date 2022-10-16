@@ -16,12 +16,14 @@
 
     <input type="password" class="form-control" name="password" placeholder="Password" required />
 
+    {{#if errorMessage}}
+      <div class="error">
+        {{errorMessage}}
+      </div>
+    {{/if}}
+
     <button type="submit" class="w-100 btn btn-lg fw-bold border-dark bg-white mt-5">Sign Up</button>
   </form>
-
-  {{#if errorMessage}}
-    {{errorMessage}}
-  {{/if}}
 
 </main>
 
