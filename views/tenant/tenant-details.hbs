@@ -1,0 +1,14 @@
+<div class="container">
+  {{!-- {{log property}} --}}
+  {{#with tenant}}
+
+    <form class="row row-cols-lg-auto g-3 align-items-center" action="/tenant/{{this._id}}" method="post" enctype="multipart/form-data">
+    {{> tenantpartial this}}      
+
+      <div>
+        <button type="submit" class="col btn btn-secondary border-dark bg-dark">Save</button>
+      </div>
+
+    </form>
+  {{/with}}
+</div>

@@ -1,7 +1,32 @@
-<div class="container">
-  <h1>New Property</h1>
-
-  {{#if user}}
-  <p>{{user}}</p>
-  {{/if}}
-</div>
+<main class="w-100 m-auto">
+  <div class="container p-4 text-start">
+    <h4 class="fw-bold">Incidents</h4>
+    <div class="pb-4 text-center">
+      <a href="/incident/create" class="btn btn-secondary bg-dark">Add new property</a>
+    </div>
+    <div class="row w-100 p-3 m-auto border shadow-sm rounded bg-white row-cols-1 row-cols-md-3 g-3">
+      {{! row w-100 p-3 m-auto border shadow-sm rounded bg-white row-cols-1 row-cols-md-2 }}
+      {{#if incidents}}
+        {{#each incidents}}
+        <div class="col">
+          <div class="card h-100 text-start">
+            {{#if gallery.[0]}}
+              <img src="/uploads/{{gallery.[0]}}" class="card-img-top" alt="{{referenceID}}" />
+            {{/if}}
+            <div class="card-body">
+              <h5 class="fw-bold"><a href="/property/{{_id}}">{{propertyType}}</a></h5>
+              <p class="fs-6"><small>RefID. {{referenceID}}</small></p>
+              <p class="card-text">{{description}}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">{{#if rented}}Rented{{else}}Not Rented{{/if}}</small>
+            </div>
+          </div>        
+        </div>
+        {{/each}}
+      {{else}}
+        <h4 class="fw-bold p-5 text-center"> You don't have any incident.</h4>
+      {{/if}}
+    </div>
+  </div>
+</main>
