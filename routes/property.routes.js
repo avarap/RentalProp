@@ -16,9 +16,13 @@ let errorRender = "error";
 router.get("/", isLoggedIn, async (req, res, next) => {
   try {
     const userData = await User.findById(req.session.user._id);
-    const data = await Property.find({ Owner: req.user._id }, {}, { rented: -1 });
+    const data = await Property.find(
+      { Owner: req.user._id },
+      {},
+      { rented: -1 }
+    );
     //Property.count(data);
-    if (userData.role === "owner") {
+    if (userData.role === "Owner") {
       res.render(templatePath + "/properties", {
         properties: data,
         userInSession: userData,
@@ -42,10 +46,13 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
     data.referenceID = req.body.referenceID;
     data.propertyType = req.body.propertyType;
     data.address = req.body.address;
+    data.address.zipCode = req.body.address;
+    data.address.city = req.body.address;
     data.description = req.body.description;
     data.sizeM2 = req.body.sizeM2;
     data.roomNumber = req.body.roomNumber;
     data.price = req.body.price;
+    console.log(data.address);
 
     if (!req.body.rented) data.rented = false;
     else data.rented = true;
@@ -66,7 +73,8 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
       //Ask how to send a error message without cleaning the page
       return res.status(400).render("property/create", {
         userInSession: req.user,
-        errorMessage: "ReferenceId need to be unique. The ReferenceId you chose is already in use.",
+        errorMessage:
+          "ReferenceId need to be unique. The ReferenceId you chose is already in use.",
       });
     }
     console.log(err);
@@ -80,20 +88,30 @@ router.get("/:id/delete", isLoggedIn, (req, res, next) => {
   Property.findByIdAndRemove(id)
     .then((data) => {
       if (!data) {
-        res.status(404).send({ message: `Cannot delete Property with id=${id}. Maybe Property was not found!` });
+        res.status(404).send({
+          message: `Cannot delete Property with id=${id}. Maybe Property was not found!`,
+        });
       } else {
         res.send({ message: "Property was deleted successfully!" });
       }
     })
     .catch((err) => {
-      res.status(500).send({ message: "Could not delete Property with id=" + id });
+      res
+        .status(500)
+        .send({ message: "Could not delete Property with id=" + id });
     });
 });
 
 router.get("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Property.findOne({ Owner: req.user._id, _id: req.params.id });
-    res.render(templatePath + "/property-details", { property: data, userInSession: req.user });
+    const data = await Property.findOne({
+      Owner: req.user._id,
+      _id: req.params.id,
+    });
+    res.render(templatePath + "/property-details", {
+      property: data,
+      userInSession: req.user,
+    });
   } catch (err) {
     res.render(errorRender);
   }
@@ -101,7 +119,10 @@ router.get("/:id", isLoggedIn, async (req, res, next) => {
 
 router.post("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Property.findOne({ Owner: req.user._id, _id: req.params.id });
+    const data = await Property.findOne({
+      Owner: req.user._id,
+      _id: req.params.id,
+    });
 
     // data.propertyType = req.body.propertyType;
     data.address = req.body.address;
@@ -130,7 +151,6 @@ router.post("/:id", isLoggedIn, async (req, res, next) => {
     console.log(err);
     res.render(errorRender);
   }
-
 });
 
 module.exports = router;
