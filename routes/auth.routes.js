@@ -36,8 +36,6 @@ router.post("/signup", isLoggedOut, (req, res) => {
     });
   }
 
-  //just to try branches
-
   //   ! This use case is using a regular expression to control for special characters and min length
   /*
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
