@@ -12,9 +12,21 @@
 
   <form action="/auth/signup" method="POST">
 
-    <input type="email" class="form-control" name="username" placeholder="Email" required />
+    <input
+      type="email"
+      class="form-control"
+      name="username"
+      placeholder="Email"
+      required
+    />
 
-    <input type="password" class="form-control" name="password" placeholder="Password" required />
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      placeholder="Password"
+      required
+    />
 
     {{#if errorMessage}}
       <div class="error">
@@ -22,7 +34,10 @@
       </div>
     {{/if}}
 
-    <button type="submit" class="w-100 btn btn-lg fw-bold border-dark bg-white mt-5">Sign Up</button>
+    <button
+      type="submit"
+      class="w-100 btn btn-lg fw-bold border-dark bg-white mt-5"
+    >Sign Up</button>
   </form>
 
 </main>
@@ -30,6 +45,6 @@
 <div>
   <p><small>Already have an account?
       <br />
-      <a href="/auth/login">Please Login</a>
+      <a href="/auth/index">Please Login</a>
     </small></p>
 </div>
