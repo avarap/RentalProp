@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js -e *.*"
+    "dev": "nodemon server.js -e *.* -i 'public/uploads/*'"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

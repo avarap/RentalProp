@@ -2,135 +2,16 @@
   <div class="container text-start">
 
     <h4 class="fw-bold">Add new tenant</h4>
-    <div
-      class="container p-5 border shadow-sm rounded bg-white m-auto text-start"
-    >
+    <div class="container p-5 border shadow-sm rounded bg-white m-auto text-start">
 
-      <form
-        class="row row-cols-lg-auto g-3 align-items-center"
-        action="/tenant/create"
-        method="post"
-      >
-        <div class="col-lg-2">
-          <label>
-            <span class="hint-text">First Name*</span>
-          </label>
-          <input
-            type="text"
-            class="form-control"
-            name="firstName"
-            value=""
-            placeholder=""
-            required
-          />
-        </div>
+      <form class="row row-cols-lg-auto g-3 align-items-center" action="/tenant/create" method="post" enctype="multipart/form-data">
+        {{> tenantpartial}}
 
-        <div class="col-lg-2">
-          <label class="hint-text">
-            <span>Last Name*</span>
-          </label>
-
-          <input
-            type="text"
-            class="form-control"
-            name="lastName"
-            value=""
-            placeholder=""
-            required
-          />
-        </div>
-
-        <div class="col-lg-5">
-          <label class="hint-text">
-            <span>Email*</span>
-          </label>
-          <input
-            type="email"
-            class="form-control text-muted"
-            name="email"
-            value=""
-            placeholder=""
-          />
-        </div>
-
-        <div class="col-lg-3">
-          <label class="hint-text">
-            <span>Id Card*</span>
-          </label>
-
-          <input
-            type="text"
-            class="form-control"
-            name="idCard"
-            value=""
-            placeholder=""
-          />
-        </div>
-
-        <div class="col-lg-2">
-          <label class="hint-text">
-            <span>Phone number</span>
-          </label>
-
-          <input
-            type="phone"
-            class="form-control mb-3"
-            name="phone"
-            value=""
-            placeholder=""
-          />
-        </div>
-
-        <div class="col-lg-5">
-          <label class="hint-text">
-            <span>Street</span>
-          </label>
-
-          <input
-            type="text"
-            class="form-control mb-3"
-            name="address"
-            value=""
-            placeholder=""
-          />
-        </div>
-
-        <div class="col-lg-2">
-          <label class="hint-text">
-            <span>Zip code</span>
-          </label>
-
-          <input
-            type="text"
-            class="form-control mb-3"
-            name="address"
-            value=""
-            placeholder=""
-          />
-        </div>
-
-        <div class="col-lg-3">
-          <label class="hint-text">
-            <span>City</span>
-          </label>
-
-          <input
-            type="text"
-            class="form-control mb-3"
-            name="address"
-            value=""
-            placeholder=""
-          />
-        </div>
         <div>
-          <button
-            class="btn btn-secondary bg-dark"
-            type="submit"
-          >Create</button>
+          <input class="col btn border-dark bg-white" type="reset" value="Reset fields" />
+          <button class="col btn btn-secondary border-dark bg-dark" type="submit">Create</button>
         </div>
-
       </form>
-
     </div>
   </div>
 </main>

@@ -1,32 +1,19 @@
 <main class="w-100 m-auto">
   <div class="container p-4 text-start">
-      {{#if userInSession.firstName}}
-        <h4 class="fw-bold">{{userInSession.firstName}}
-          {{userInSession.lastName}}'s profile details</h4>
-      {{else}}
-        <h4 class="fw-bold">{{userInSession.username}}'s profile details</h4>
-      {{/if}}
-    <div
-      class="container p-4 border shadow-sm rounded bg-white m-auto text-start"
-    >
+    {{#if userInSession.firstName}}
+      <h4 class="fw-bold">{{userInSession.firstName}}
+        {{userInSession.lastName}}'s profile details</h4>
+    {{else}}
+      <h4 class="fw-bold">{{userInSession.username}}'s profile details</h4>
+    {{/if}}
+    <div class="container p-4 border shadow-sm rounded bg-white m-auto text-start">
 
-      <form
-        class="row row-cols-lg-auto g-3 align-items-center"
-        action="/userProfile/edit"
-        method="post"
-      >
+      <form class="row row-cols-lg-auto g-3 align-items-center" action="/userProfile/edit" method="post">
         <div class="col-lg-2">
           <label>
             <span class="hint-text">First Name*</span>
           </label>
-          <input
-            type="text"
-            class="form-control"
-            name="firstName"
-            value="{{userInSession.firstName}}"
-            placeholder="First name"
-            required
-          />
+          <input type="text" class="form-control" name="firstName" value="{{userInSession.firstName}}" placeholder="First name" required />
         </div>
 
         <div class="col-lg-2">
@@ -34,29 +21,14 @@
             <span>Last Name*</span>
           </label>
 
-          <input
-            type="text"
-            class="form-control"
-            name="lastName"
-            value="{{userInSession.lastName}}"
-            placeholder="Last name"
-            required
-          />
+          <input type="text" class="form-control" name="lastName" value="{{userInSession.lastName}}" placeholder="Last name" required />
         </div>
 
         <div class="col-lg-5">
           <label class="hint-text">
             <span>Email*</span>
           </label>
-          <input
-            type="email"
-            class="form-control text-muted"
-            name="email"
-            value="{{userInSession.username}}"
-            placeholder="Email"
-            disabled
-            readonly
-          />
+          <input type="email" class="form-control text-muted" name="email" value="{{userInSession.username}}" placeholder="Email" disabled readonly />
         </div>
 
         <div class="col-lg-3">
@@ -64,15 +36,7 @@
             <span>Password*</span>
           </label>
 
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            value="{{userInSession.password}}"
-            placeholder="Password"
-            disabled
-            required
-          />
+          <input type="password" class="form-control" name="password" value="{{userInSession.password}}" placeholder="Password" disabled required />
         </div>
 
         <div class="col-lg-2">
@@ -80,13 +44,7 @@
             <span>Phone number</span>
           </label>
 
-          <input
-            type="phone"
-            class="form-control mb-3"
-            name="phone"
-            value="{{userInSession.phone}}"
-            placeholder="Phone number"
-          />
+          <input type="phone" class="form-control mb-3" name="phone" value="{{userInSession.phone}}" placeholder="Phone number" />
         </div>
 
         <div class="col-lg-5">
@@ -94,13 +52,7 @@
             <span>Street</span>
           </label>
 
-          <input
-            type="text"
-            class="form-control mb-3"
-            name="street"
-            value="{{userInSession.address.street}}"
-            placeholder="Street"
-          />
+          <input type="text" class="form-control mb-3" name="address" value="{{userInSession.address.street}}" placeholder="Address" />
         </div>
 
         <div class="col-lg-2">
@@ -108,13 +60,7 @@
             <span>Zip code</span>
           </label>
 
-          <input
-            type="text"
-            class="form-control mb-3"
-            name="zipCode"
-            value="{{userInSession.address.zipCode}}"
-            placeholder="Zip code"
-          />
+          <input type="text" class="form-control mb-3" name="address" value="{{userInSession.address.zipCode}}" placeholder="Zip code" />
         </div>
 
         <div class="col-lg-3">
@@ -122,20 +68,11 @@
             <span>City</span>
           </label>
 
-          <input
-            type="text"
-            class="form-control mb-3"
-            name="city"
-            value="{{userInSession.address.city}}"
-            placeholder="City"
-          />
+          <input type="text" class="form-control mb-3" name="address" value="{{userInSession.address.city}}" placeholder="City" />
         </div>
-<div>
-        <button
-          class="btn btn-secondary bg-dark"
-          type="submit"
-        >Update</button>
-</div>
+        <div>
+          <button class="btn btn-secondary bg-dark" type="submit">Update</button>
+        </div>
 
       </form>
 

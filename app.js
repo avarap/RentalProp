@@ -12,10 +12,13 @@ const express = require("express");
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
 const hbs = require("hbs");
+const path = require("path");
 
 hbs.registerHelper("log", function (something) {
   console.log(something);
 });
+
+hbs.registerPartials(path.join(__dirname, "views/partials"));
 
 const app = express();
 
