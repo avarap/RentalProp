@@ -22,7 +22,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
       { rented: -1 }
     );
     //Property.count(data);
-    if (userData.role === "owner") {
+    if (userData.role === "Owner") {
       res.render(templatePath + "/properties", {
         properties: data,
         userInSession: userData,
@@ -49,6 +49,8 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
     data.referenceID = req.body.referenceID;
     data.propertyType = req.body.propertyType;
     data.address = req.body.address;
+    data.address.zipCode = req.body.address;
+    data.address.city = req.body.address;
     data.description = req.body.description;
     data.sizeM2 = req.body.sizeM2;
     data.roomNumber = req.body.roomNumber;
@@ -89,11 +91,17 @@ router.get("/:id/delete", isLoggedIn, (req, res, next) => {
   Property.findByIdAndRemove(id)
     .then((data) => {
       if (!data) {
+<<<<<<< HEAD
         res
           .status(404)
           .send({
             message: `Cannot delete Property with id=${id}. Maybe Property was not found!`,
           });
+=======
+        res.status(404).send({
+          message: `Cannot delete Property with id=${id}. Maybe Property was not found!`,
+        });
+>>>>>>> origin/main
       } else {
         res.send({ message: "Property was deleted successfully!" });
       }

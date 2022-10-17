@@ -17,7 +17,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
   try {
     const data = await Tenant.find({ Owner: req.user._id });
 
-    if (req.user.role === "owner") {
+    if (req.user.role === "Owner") {
       res.render(templatePath + "/tenants", {
         tenants: data,
         userInSession: req.user,

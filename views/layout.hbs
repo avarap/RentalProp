@@ -23,7 +23,7 @@
   <body class="d-flex h-100">
     <div class="cover-container d-flex w-100 mx-auto flex-column text-center">
       {{#if userInSession}}
-        <header class="p-3 text-bg-light shadow-sm">
+        <header class="p-3 text-bg-light shadow-sm sticky-top">
           <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
               <a href="/dashboard" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -41,7 +41,7 @@
                   <small class="hint-text">{{userInSession.firstName}}
                     {{userInSession.lastName}}
                     ·
-                    {{capitalizedRole}}</small>
+                    {{userInSession.role}}</small>
                   <small class="hint-text">{{userInSession.username}}</small>
                 </div>
               {{else}}
@@ -63,7 +63,7 @@
         </header>
       {{/if}}
 
-      <div class="w-100 m-auto">
+      <div class="w-100 m-auto ">
         {{{body}}}
       </div>
 
