@@ -1,6 +1,6 @@
 <main class="w-100 m-auto">
   <div class="container p-4 text-start">
-    <h4 class="fw-bold">Properties</h4>
+    <h4 class="fw-bold">Incidents</h4>
     <div class="row w-100 p-3 m-auto border shadow-sm rounded bg-white">
       {{#if incidents}}
         <div class="col mx-auto">
@@ -13,19 +13,12 @@
                 <p class="card-text">{{description}}</p>
                 <p class="card-text">{{status}}</p>
               </div>
-              <div class="card-footer">
-                <small class="text-muted">{{#if rented}}Rented{{else}}Not Rented{{/if}}</small>
-              </div>
             {{/each}}
           </div>
         </div>
       {{else}}
-        <h4 class="fw-bold p-5 text-center"> You don't have any property.</h4>
+        <h4 class="fw-bold p-5 text-center"> There are any incidents.</h4>
       {{/if}}
-      <div class="pb-4 text-center">
-        <a href="/property/create" class="btn btn-secondary bg-dark">Add new
-          property</a>
-      </div>
     </div>
   </div>
 </main>

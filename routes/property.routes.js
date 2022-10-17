@@ -31,7 +31,10 @@ router.get("/", isLoggedIn, async (req, res, next) => {
       });
       return;
     }
-    res.render(templatePath + "/properties", { properties: data });
+    res.render(templatePath + "/properties", {
+      properties: data,
+      userInSession: userData,
+    });
   } catch (err) {
     console.log(err);
     res.render(errorRender);
