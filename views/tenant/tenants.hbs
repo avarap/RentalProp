@@ -1,31 +1,38 @@
 <main class="w-100 m-auto">
   <div class="container p-4 text-start">
-    <h4 class="fw-bold">Tenants</h4>
-    <div class="row w-100 p-5 m-auto border shadow-sm rounded bg-white row-cols-1 row-cols-md-3 g-3">
-    <div class="pb-4 text-center">
-      <a href="/tenant/create" class="btn btn-secondary bg-dark">Add new tenant</a>
+    <div class="row">
+      <h4 class="fw-bold">Tenants</h4>
     </div>
+    <div class="row w-100 p-3 m-auto border shadow-sm rounded bg-white">
+      <div class="text-center my-3">
+        <a href="/tenant/create" class="btn btn-secondary bg-dark">Add new
+          tenant</a>
+      </div>
       {{! email,firstName,lastName,pictureProfile,phone,idcard }}
       {{#if tenants}}
         {{#each tenants}}
-        <div class="col-lg-3 col-md-4 m-auto">
-          <div class="card h-100 text-start">
-            {{#if pictureProfile}}
-              <img src="/uploads/{{pictureProfile}}" class="card-img-top" alt="{{referenceID}}" />
-            {{/if}}
-            <div class="card-body">
-              <h5 class="fw-bold"><a href="/tenant/{{_id}}">{{firstName}} {{lastName}}</a></h5>
-              <p class="fs-6"><small>{{email}}</small></p>
-              
-            </div>
-            {{!-- <div class="card-footer">
+          <div class="col-lg-3 col-md-3 my-3 g-3 m-auto">
+            <div class="card h-100 text-start">
+              {{#if pictureProfile}}
+                <img
+                  src="/uploads/{{pictureProfile}}"
+                  class="card-img-top"
+                  alt="{{firstName}} {{lastName}} Profile Picture"
+                />
+              {{/if}}
+              <div class="card-body">
+                <h5 class="fw-bold"><a href="/tenant/{{_id}}">{{firstName}}
+                    {{lastName}}</a></h5>
+                <p class="hint-text">{{email}}</p>
+              </div>
+              {{!-- <div class="card-footer">
               <small class="text-muted">{{#if rented}}Rented{{else}}Not Rented{{/if}}</small>
             </div> --}}
-          </div>        
-        </div>
+            </div>
+          </div>
         {{/each}}
       {{else}}
-        <h4 class="fw-bold p-5 text-center"> You don't have any tenant.</h4>
+        <h4 class="p-5 text-center text-muted"> You don't have any tenant.</h4>
       {{/if}}
     </div>
   </div>

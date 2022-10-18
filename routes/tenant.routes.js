@@ -13,12 +13,11 @@ let templatePath = "./tenant";
 let redirectPath = "/tenant";
 let errorRender = "error";
 
-
 router.get("/", isLoggedIn, async (req, res, next) => {
   try {
     const data = await Tenant.find({ Owner: req.user._id });
 
-    if (req.user.role === "Owner") {
+    if (req.user.role === "owner") {
       res.render(templatePath + "/tenants", {
         tenants: data,
         userInSession: req.user,
@@ -81,8 +80,9 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.get("/:id/delete", isLoggedIn, (req, res, next) => {
+router.get("/delete/:id", isLoggedIn, (req, res, next) => {
   const id = req.params.id;
+  console.log(id);
 
   Tenant.findByIdAndRemove(id)
     .then((data) => {
@@ -91,7 +91,8 @@ router.get("/:id/delete", isLoggedIn, (req, res, next) => {
           message: `Cannot delete Tenant with id=${id}. Maybe Tenant was not found!`,
         });
       } else {
-        res.send({ message: "Tenant was deleted successfully!" });
+        // res.send({ message: "Tenant was deleted successfully!" });
+        res.redirect(redirectPath);
       }
     })
     .catch((err) => {
@@ -103,7 +104,10 @@ router.get("/:id/delete", isLoggedIn, (req, res, next) => {
 
 router.get("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Tenant.findOne({ Owner: req.user._id,  _id: req.params.id, });
+    const data = await Tenant.findOne({
+      Owner: req.user._id,
+      _id: req.params.id,
+    });
     const properties = await Property.find({ Owner: req.user._id });
     //console.log("***L1",properties)
 

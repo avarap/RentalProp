@@ -128,7 +128,9 @@ router.post("/:id", isLoggedIn, async (req, res, next) => {
     });
 
     // data.propertyType = req.body.propertyType;
-    data.address = req.body.address;
+    data.address.street = req.body.street;
+    data.address.zipCode = req.body.zipCode;
+    data.address.city = req.body.city;
     data.description = req.body.description;
     data.sizeM2 = req.body.sizeM2;
     data.roomNumber = req.body.roomNumber;

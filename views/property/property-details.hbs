@@ -8,7 +8,7 @@
     <form class="row row-cols-lg-auto g-3 align-items-center" action="/property/{{this._id}}" method="post" enctype="multipart/form-data">
       <div class="col-lg-2 col-md-6">
         <label for="referenceID"><span class="hint-text">ReferenceID*</span></label>
-        <input type="text" class="form-control" id="referenceID" name="referenceID" value="{{referenceID}}" disabled readonly />
+        <input type="text" class="form-control" id="referenceID" name="referenceID" placeholder="Apartment no.35" value="{{referenceID}}" disabled readonly />
       </div>
 
       <div class="col-lg-2 col-md-6">
@@ -23,12 +23,12 @@
 
       <div class="col-lg-2">
         <label for="zipCode"><span class="hint-text">Zip code</span></label>
-        <input type="text" class="form-control" id="address" name="zipCode" placeholder="1234 Main St" value="{{address.zipCode}}" />
+        <input type="text" class="form-control" id="address" name="zipCode" placeholder="14925" value="{{address.zipCode}}" />
       </div>
 
       <div class="col-lg-2">
         <label for="city"><span class="hint-text">City</span></label>
-        <input type="text" class="form-control" id="address" name="city" placeholder="1234 Main St" value="{{address.city}}" />
+        <input type="text" class="form-control" id="address" name="city" placeholder="New York" value="{{address.city}}" />
       </div>
 
       <div class="col-lg-12">
