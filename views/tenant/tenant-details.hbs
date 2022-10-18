@@ -1,14 +1,21 @@
 <div class="container">
   {{!-- {{log property}} --}}
+  
   {{#with tenant}}
-
     <form class="row row-cols-lg-auto g-3 align-items-center" action="/tenant/{{this._id}}" method="post" enctype="multipart/form-data">
-    {{> tenantpartial this}}      
+      {{> tenantpartial this}}
+
+      <select name="property" multiple>
+          <option value="">&nbsp;</option>
+          {{#each ../properties}}
+            {{log this._id}}
+            <option value="{{this._id}}" {{#if (isIncluded this._id @root.tenant.property)}} selected="selected" {{/if}} >{{this.referenceID}}</option>
+          {{/each}} 
+      </select>
 
       <div>
         <button type="submit" class="col btn btn-secondary border-dark bg-dark">Save</button>
       </div>
-
     </form>
   {{/with}}
 </div>

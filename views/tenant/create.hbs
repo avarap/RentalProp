@@ -2,14 +2,31 @@
   <div class="container text-start">
 
     <h4 class="fw-bold">Add new tenant</h4>
-    <div class="container p-5 border shadow-sm rounded bg-white m-auto text-start">
+    <div class="container p-5 border shadow-sm rounded bg-white m-auto text-start" >
 
-      <form class="row row-cols-lg-auto g-3 align-items-center" action="/tenant/create" method="post" enctype="multipart/form-data">
+      <form class="row row-cols-lg-auto g-3 align-items-center" action="/tenant/create" method="post" enctype="multipart/form-data" >
         {{> tenantpartial}}
 
+        <select name="property" multiple>
+          <option value="">&nbsp;</option>
+          {{! <option value="none" selected disabled hidden>Select an Option</option> }}
+
+          {{#each properties}}
+            {{log this._id}}
+            <option value="{{this._id}}">{{this.referenceID}}</option>
+          {{/each}}
+        </select>
+
         <div>
-          <input class="col btn border-dark bg-white" type="reset" value="Reset fields" />
-          <button class="col btn btn-secondary border-dark bg-dark" type="submit">Create</button>
+          <input
+            class="col btn border-dark bg-white"
+            type="reset"
+            value="Reset fields"
+          />
+          <button
+            class="col btn btn-secondary border-dark bg-dark"
+            type="submit"
+          >Create</button>
         </div>
       </form>
     </div>

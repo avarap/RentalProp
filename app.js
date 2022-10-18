@@ -18,6 +18,15 @@ hbs.registerHelper("log", function (something) {
   console.log(something);
 });
 
+hbs.registerHelper("isIncluded", function (val1, val2) {
+  const newVal1 = val1.toString();
+  const newVal2 = val2.map((val) => val.toString());
+  if (newVal2.indexOf(newVal1) > -1) {
+    return true;
+  }
+  return false;
+});
+
 hbs.registerPartials(path.join(__dirname, "views/partials"));
 
 const app = express();
