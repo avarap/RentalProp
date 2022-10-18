@@ -58,15 +58,13 @@ router.get("/dashboard", isLoggedIn, async (req, res, next) => {
 //     const capitalizedRole = capitalized(userData.role);
     if (userData.role === "owner") {
       res.render("users/dashboard/owner-dashboard", {
-        userInSession: userData,
-        capitalizedRole,
+        userInSession: userData
       });
       return;
     }
     if (userData.role === "tenant") {
       res.render("users/dashboard/tenant-dashboard", {
-        userInSession: userData,
-        capitalizedRole,
+        userInSession: userData
       });
       return;
     }
