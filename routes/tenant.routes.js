@@ -13,9 +13,8 @@ let templatePath = "./tenant";
 let redirectPath = "/tenant";
 let errorRender = "error";
 
-router.get("/", isLoggedIn, async (req, res, next) => {
-  console.log("helllooo from tenants");
 
+router.get("/", isLoggedIn, async (req, res, next) => {
   try {
     const data = await Tenant.find({ Owner: req.user._id });
 
@@ -38,7 +37,20 @@ router.get("/", isLoggedIn, async (req, res, next) => {
 });
 
 router.get("/create", isLoggedIn, async (req, res, next) => {
-  res.render(templatePath + "/create", { userInSession: req.user });
+  const properties = await Property.findOne({ Owner: req.user._id });
+  // const properties = await Property.aggregate([
+  //   {
+  //     $lookup: {
+  //       from: "Tenants",
+  //       localField: "_id",
+  //       foreignField: "property",
+  //       as: "company_users",
+  //     },
+  //   },
+  //   { $match: { "company_users.0": { $exists: false } } },
+  // ]).exec();
+  //console.log(properties);
+  res.render(templatePath + "/create", { userInSession: req.user, properties });
 });
 
 router.post("/create", isLoggedIn, async (req, res, next) => {
@@ -55,6 +67,8 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
       let fileU = await fileUpload(req.files.pictureProfile, req.user._id);
       data.pictureProfile = fileU;
     }
+
+    data.property = req.body.property;
 
     await data.save();
     return res.redirect(redirectPath);
@@ -89,13 +103,14 @@ router.get("/:id/delete", isLoggedIn, (req, res, next) => {
 
 router.get("/:id", isLoggedIn, async (req, res, next) => {
   try {
-    const data = await Tenant.findOne({
-      Owner: req.user._id,
-      _id: req.params.id,
-    });
+    const data = await Tenant.findOne({ Owner: req.user._id,  _id: req.params.id, });
+    const properties = await Property.find({ Owner: req.user._id });
+    //console.log("***L1",properties)
+
     res.render(templatePath + "/tenant-details", {
       tenant: data,
       userInSession: req.user,
+      properties,
     });
   } catch (err) {
     res.render(errorRender);
