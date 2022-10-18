@@ -10,22 +10,22 @@
   <input type="text" class="form-control" name="lastName" value="{{lastName}}" placeholder="Last name" required />
 </div>
 
-<div class="col-lg-5">
+<div class="col-lg-4">
   <label class="hint-text"><span>Email*</span></label>
   <input type="email" class="form-control text-muted" name="email" value="{{email}}" placeholder="Email" required  />
 </div>
 
 <div class="col-lg-2">
   <label class="hint-text"><span>Phone number</span></label>
-  <input type="phone" class="form-control mb-3" name="phone" value="{{phone}}" placeholder="Phone number" />
+  <input type="phone" class="form-control" name="phone" value="{{phone}}" placeholder="Phone number" />
 </div>
 
 <div class="col-lg-2">
   <label class="hint-text"><span>idcard</span></label>
-  <input type="text" class="form-control mb-3" name="idcard" value="{{idcard}}" placeholder="idcard" />
+  <input type="text" class="form-control" name="idcard" value="{{idcard}}" placeholder="idcard" />
 </div>
 
-<div class="col-lg-6 col-md-12">
+<div class="col-lg-12 col-md-12">
   <label for="pictureProfile"><span class="hint-text">Photo</span></label>
   <input type="file" class="form-control" name="pictureProfile" accept="image/png, image/jpeg" {{#if pictureProfile}} value="{{pictureProfile}}" {{/if}}/>
 </div>

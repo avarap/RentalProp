@@ -1,14 +1,14 @@
 <main class="w-100 m-auto">
   <div class="container p-4 text-start">
     <h4 class="fw-bold">Tenants</h4>
+    <div class="row w-100 p-5 m-auto border shadow-sm rounded bg-white row-cols-1 row-cols-md-3 g-3">
     <div class="pb-4 text-center">
       <a href="/tenant/create" class="btn btn-secondary bg-dark">Add new tenant</a>
     </div>
-    <div class="row w-100 p-3 m-auto border shadow-sm rounded bg-white row-cols-1 row-cols-md-3 g-3">
       {{! email,firstName,lastName,pictureProfile,phone,idcard }}
       {{#if tenants}}
         {{#each tenants}}
-        <div class="col">
+        <div class="col-lg-3 col-md-4 m-auto">
           <div class="card h-100 text-start">
             {{#if pictureProfile}}
               <img src="/uploads/{{pictureProfile}}" class="card-img-top" alt="{{referenceID}}" />
