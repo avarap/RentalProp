@@ -1,44 +1,57 @@
-<div class="container">
-  {{!-- {{log property}} --}}
+<main class="w-100 m-auto">
+
+<div class="container p-4 text-start">
+<h4 class="fw-bold">{{property.propertyType}} - {{property.referenceID}} details</h4>
   {{#with property}}
+    <div class="container p-4 border shadow-sm rounded bg-white m-auto text-start">
 
     <form class="row row-cols-lg-auto g-3 align-items-center" action="/property/{{this._id}}" method="post" enctype="multipart/form-data">
-      <div class="col-lg-3 col-md-6">
-        <label for="referenceID" class="form-label"><span class="hint-text">ReferenceID*</span></label>
+      <div class="col-lg-2 col-md-6">
+        <label for="referenceID"><span class="hint-text">ReferenceID*</span></label>
         <input type="text" class="form-control" id="referenceID" name="referenceID" value="{{referenceID}}" disabled readonly />
       </div>
 
-      <div class="col-lg-3 col-md-6">
-        <label for="propertyType" class="form-label"><span class="hint-text">Property type*</span></label>
+      <div class="col-lg-2 col-md-6">
+        <label for="propertyType"><span class="hint-text">Property type*</span></label>
         <input type="text" class="form-control" id="propertyType" name="propertyType" value="{{propertyType}}" disabled readonly />
       </div>
 
-      <div class="col-lg-6">
-        <label for="address"><span class="hint-text">Address</span></label>
-        <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" value="{{address}}" />
+      <div class="col-lg-4">
+        <label for="street"><span class="hint-text">Street</span></label>
+        <input type="text" class="form-control" id="address" name="street" placeholder="1234 Main St" value="{{address.street}}" />
+      </div>
+
+      <div class="col-lg-2">
+        <label for="zipCode"><span class="hint-text">Zip code</span></label>
+        <input type="text" class="form-control" id="address" name="zipCode" placeholder="1234 Main St" value="{{address.zipCode}}" />
+      </div>
+
+      <div class="col-lg-2">
+        <label for="city"><span class="hint-text">City</span></label>
+        <input type="text" class="form-control" id="address" name="city" placeholder="1234 Main St" value="{{address.city}}" />
       </div>
 
       <div class="col-lg-12">
         <label for="description"><span class="hint-text">Description</span></label>
-        <textarea type="text" class="form-control" name="description">{{description}}</textarea>
+        <textarea type="text" class="form-control" name="description" rows="6">{{description}}</textarea>
       </div>
 
-      <div class="col-lg-2 col-md-4 col-sm-4">
+      <div class="col-lg-1 col-md-4 col-sm-4">
         <label for="sizeM2"><span class="hint-text">Size (m²)</span></label>
         <input type="number" class="form-control" name="sizeM2" min="0" placeholder="90" value="{{sizeM2}}" />
       </div>
 
-      <div class="col-lg-2 col-md-4 col-sm-4">
-        <label for="roomNumber"><span class="hint-text">Number of rooms</span></label>
+      <div class="col-lg-1 col-md-4 col-sm-4">
+        <label for="roomNumber"><span class="hint-text">Rooms</span></label>
         <input type="number" class="form-control" name="roomNumber" min="0" placeholder="3" value="{{roomNumber}}"/>
       </div>
 
-      <div class="col-lg-2 col-md-4 col-sm-4">
+      <div class="col-lg-1 col-md-4 col-sm-4">
         <label for="price"><span class="hint-text">Price</span></label>
         <input type="number" class="form-control" name="price" min="0" placeholder="0" value="{{price}}"/>
       </div>
 
-      <div class="col-lg-6 col-md-12">
+      <div class="col-lg-9 col-md-12">
         <label for="gallery"><span class="hint-text">Gallery</span></label>
         <input type="file" class="form-control" name="gallery" accept="image/png, image/jpeg" {{#if gallery.[0]}}value="{{gallery.[0]}}" {{/if}}/>
       </div>
@@ -54,9 +67,11 @@
       {{! <label for="Tenant">Tenant</label><input type="text" name="Tenant" /> }}
 
       <div>
-        <button type="submit" class="col btn btn-secondary border-dark bg-dark">Save</button>
+        <button type="submit" class="col btn btn-secondary border-dark bg-dark">Update</button>
       </div>
 
     </form>
+    </div>
   {{/with}}
 </div>
+</main>
