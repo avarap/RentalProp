@@ -7,10 +7,9 @@ const User = require("../models/User.model");
 router.get("/userProfile", async (req, res) => {
   try {
     const userData = await User.findById(req.session.user._id);
-    const capitalizedRole = capitalized(userData.role);
+//     const capitalizedRole = capitalized(userData.role);
     res.render("users/user-profile", {
-      userInSession: userData,
-      capitalizedRole,
+      userInSession: userData
     });
   } catch (err) {
     res.render("error");
@@ -56,15 +55,15 @@ router.post("/userProfile/edit", async (req, res) => {
 router.get("/dashboard", isLoggedIn, async (req, res, next) => {
   try {
     const userData = await User.findById(req.session.user._id);
-    const capitalizedRole = capitalized(userData.role);
-    if (userData.role === "Owner") {
+//     const capitalizedRole = capitalized(userData.role);
+    if (userData.role === "owner") {
       res.render("users/dashboard/owner-dashboard", {
         userInSession: userData,
         capitalizedRole,
       });
       return;
     }
-    if (userData.role === "Tenant") {
+    if (userData.role === "tenant") {
       res.render("users/dashboard/tenant-dashboard", {
         userInSession: userData,
         capitalizedRole,
