@@ -10,7 +10,7 @@
           <label for="referenceID ">
             <span class="hint-text">ReferenceID*</span>
           </label>
-          <input type="text" class="form-control" name="referenceID" required />
+          <input type="text" class="form-control" name="referenceID" placeholder="E.g. 368" required />
         </div>
 
         <div class="col-lg-2 col-md-6">
@@ -18,13 +18,14 @@
             <span class="hint-text">Property type*</span>
           </label>
           <select name="propertyType" class="form-select" required>
-            <option value="Room">Room</option>
-            <option value="Apartment" selected>Apartment</option>
-            <option value="Commercial">Comercial</option>
-            <option value="Storage">Storage</option>
-            <option value="Parking Space">Parking Space</option>
-            <option value="Mobile Home">Mobile Home</option>
-            <option value="villa">Villa</option>
+            <option value="apartment" selected>Apartment</option>
+            <option value="commercial">Commercial</option>
+            <option value="garage">Garage</option>
+            <option value="mobileHome">Mobile Home</option>
+            <option value="office">Office</option>
+            <option value="parkingSpace">Parking Space</option>
+            <option value="room">Room</option>
+            <option value="storage">Storage</option>
           </select>
         </div>
 
@@ -32,19 +33,19 @@
           <label for="street">
             <span class="hint-text">Street</span>
           </label>
-          <input type="text" class="form-control" name="street" />
+          <input type="text" class="form-control" name="street" placeholder="1234 Main St" />
         </div>
         <div class="col-lg-2">
           <label for="zipCode">
             <span class="hint-text">Zip code</span>
           </label>
-          <input type="text" class="form-control" name="zipCode" />
+          <input type="text" class="form-control" name="zipCode" placeholder="14925"/>
         </div>
         <div class="col-lg-2">
           <label for="city">
             <span class="hint-text">City</span>
           </label>
-          <input type="text" class="form-control" name="city" />
+          <input type="text" class="form-control" name="city" placeholder="New York"/>
         </div>
 
         <div class="col-lg-12">

@@ -1,0 +1,75 @@
+{{log property}}
+<main class="w-100 m-auto">
+  <div class="container text-start">
+
+    <h4 class="fw-bold">Create incident</h4>
+    <div
+      class="container p-5 border shadow-sm rounded bg-white m-auto text-start"
+    >
+
+      <form
+        class="row row-cols-lg-auto g-3 align-items-center"
+        action="/incident/create"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+
+        <div class="col-lg-6">
+          <label>
+            <span class="hint-text">Select Property</span>
+          </label>
+          <select name="property" class="form-select">
+            <option value="">&nbsp;</option>
+              {{#each ../properties}}
+                {{log this._id}}
+                <option value="{{this._id}}" {{#if (isIncluded this._id @root.tenant.property)}} selected="selected" {{/if}} >{{this.referenceID}}</option>
+              {{/each}} 
+          </select>
+        </div>
+
+        <div class="col-lg-6 md-12">
+          <label for="propertyType">
+            <span class="hint-text">Incident type*</span>
+          </label>
+          <select name="subject" class="form-select" aria-placeholder="Select incident type" required>
+            <option value="appliances">Appliances</option>
+            <option value="building">Building</option>
+            <option value="cleaning">Cleaning</option>
+            <option value="electricity">Electricity</option>
+            <option value="gardening">Gardening</option>
+            <option value="gas">Gas</option>
+            <option value="internet">Internet</option>
+            <option value="water">Water</option>
+            <option value="other">Villa</option>
+          </select>
+        </div>
+
+
+        <div class="col-lg-12">
+          <label for="description"><span
+              class="hint-text"
+            >Description</span></label>
+          <textarea
+            type="text"
+            class="form-control"
+            name="description"
+            rows="6"
+          ></textarea>
+        </div>
+
+        <div>
+          <input
+            class="col btn border-dark bg-white"
+            type="reset"
+            value="Reset fields"
+          />
+          <button
+            class="col btn btn-secondary border-dark bg-dark"
+            type="submit"
+          >Create</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</main>
