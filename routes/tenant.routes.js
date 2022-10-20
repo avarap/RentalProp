@@ -36,7 +36,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
 });
 
 router.get("/create", isLoggedIn, async (req, res, next) => {
-  const properties = await Property.findOne({ Owner: req.user._id });
+  const properties = await Property.find({ Owner: req.user._id });
   // const properties = await Property.aggregate([
   //   {
   //     $lookup: {
