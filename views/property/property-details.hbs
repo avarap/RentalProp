@@ -3,7 +3,7 @@
 <div class="container p-4 text-start">
 <h4 class="fw-bold">{{property.propertyType}} - {{property.referenceID}} details</h4>
   {{#with property}}
-    <div class="container p-4 border shadow-sm rounded bg-white m-auto text-start">
+    <div class="container p-4 border shadow-sm rounded bg-white bg-opacity-75 m-auto text-start">
 
     <form class="row row-cols-lg-auto g-3 align-items-center" action="/property/{{this._id}}" method="post" enctype="multipart/form-data">
       <div class="col-lg-2 col-md-6">

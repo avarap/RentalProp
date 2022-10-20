@@ -1,0 +1,40 @@
+<main class="w-100 m-auto">
+
+<div class="container p-4 text-start">
+<h4 class="fw-bold">{{Incident.subject}}</h4>
+{{log Incident}}
+  {{#with Incident}}
+    <div class="container p-4 border shadow-sm rounded bg-white bg-opacity-75 m-auto text-start">
+
+    <form class="row row-cols-lg-auto g-3 align-items-center" action="/incident/{{this._id}}" method="post" enctype="multipart/form-data">
+      <div class="col-lg-2 col-md-6">
+        <label for="subject"><span class="hint-text">Subject</span></label>
+        <input type="text" class="form-control" id="subject" name="subject" placeholder="" value="{{subject}}" readonly/>
+      </div>
+
+      <div class="col-lg-2 col-md-6">
+        <label for="property"><span class="hint-text">Property</span></label>
+        <input type="text" class="form-control" id="subject" name="subject" placeholder="" value="" readonly/>
+      </div>
+
+      <div class="col-lg-12">
+        <label for="description"><span class="hint-text">Description</span></label>
+        <textarea type="text" class="form-control" name="description" rows="6">{{description}}</textarea>
+      </div>
+
+
+
+      {{! <label for="Owner">Owner</label><input type="text" name="Owner" /> }}
+      {{! <label for="Tenant">Tenant</label><input type="text" name="Tenant" /> }}
+
+      <div>
+        <button type="submit" class="col btn btn-secondary border-dark bg-dark">Update</button>
+                <a href="/incident/delete/{{id}}" class="btn border-dark bg-white">Delete incident</a>        
+
+      </div>
+
+    </form>
+    </div>
+  {{/with}}
+</div>
+</main>

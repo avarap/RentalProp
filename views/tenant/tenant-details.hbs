@@ -3,7 +3,7 @@
   {{!-- {{log property}} --}}
   <h4 class="fw-bold">{{tenant.firstName}} {{tenant.lastName}}'s details</h4>
   {{#with tenant}}
-    <div class="container p-4 border shadow-sm rounded bg-white m-auto text-start">
+    <div class="container p-4 border shadow-sm rounded bg-white bg-opacity-75 m-auto text-start">
 
     <form class="row row-cols-lg-auto g-3 align-items-center" action="/tenant/{{this._id}}" method="post" enctype="multipart/form-data">
       {{> tenantpartial this}}

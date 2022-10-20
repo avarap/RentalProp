@@ -3,7 +3,7 @@
     <div class="row">
       <h4 class="col fw-bold">Properties</h4>
     </div>
-    <div class="row w-100 p-3 m-auto border shadow-sm rounded bg-white">
+    <div class="row w-100 p-3 m-auto border shadow-sm rounded bg-white bg-opacity-75">
       <div class="text-center my-3">
         <a href="/property/create" class="btn btn-secondary bg-dark">Add new
           property</a>
@@ -11,7 +11,7 @@
       {{! row w-100 p-3 m-auto border shadow-sm rounded bg-white row-cols-1 row-cols-md-2 }}
       {{#if properties}}
         {{#each properties}}
-          <div class="col-lg-4 col-md-6 my-3 g-3">
+          <div class="col-lg-4 col-md-6 my-3 mx-auto g-3">
             <div class="card h-100 text-start">
               {{#if gallery.[0]}}
                 <a href="/property/{{_id}}">
