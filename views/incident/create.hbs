@@ -1,10 +1,9 @@
-{{log property}}
 <main class="w-100 m-auto">
   <div class="container text-start">
 
     <h4 class="fw-bold">Create incident</h4>
     <div
-      class="container p-5 border shadow-sm rounded bg-white m-auto text-start"
+      class="container p-5 border shadow-sm rounded bg-white bg-opacity-75 m-auto text-start"
     >
 
       <form
@@ -19,10 +18,9 @@
             <span class="hint-text">Select Property</span>
           </label>
           <select name="property" class="form-select">
-            <option value="">&nbsp;</option>
-              {{#each ../properties}}
-                {{log this._id}}
-                <option value="{{this._id}}" {{#if (isIncluded this._id @root.tenant.property)}} selected="selected" {{/if}} >{{this.referenceID}}</option>
+            {{!-- <option value="">&nbsp;</option> --}}
+              {{#each properties}}
+                <option value="{{_id}}">{{propertyType}} {{referenceID}}</option>
               {{/each}} 
           </select>
         </div>
@@ -32,15 +30,15 @@
             <span class="hint-text">Incident type*</span>
           </label>
           <select name="subject" class="form-select" aria-placeholder="Select incident type" required>
-            <option value="appliances">Appliances</option>
-            <option value="building">Building</option>
-            <option value="cleaning">Cleaning</option>
-            <option value="electricity">Electricity</option>
-            <option value="gardening">Gardening</option>
-            <option value="gas">Gas</option>
-            <option value="internet">Internet</option>
-            <option value="water">Water</option>
-            <option value="other">Villa</option>
+            <option value="Appliances">Appliances</option>
+            <option value="Building">Building</option>
+            <option value="Cleaning">Cleaning</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Gardening">Gardening</option>
+            <option value="Gas">Gas</option>
+            <option value="Internet">Internet</option>
+            <option value="Water">Water</option>
+            <option value="Other">Villa</option>
           </select>
         </div>
 

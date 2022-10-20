@@ -11,7 +11,12 @@ async function fileUpload(fileData, folder) {
     if (!folder) {
       fileLoc = path.join("public", "uploads", newFilename + "." + fileNameExt);
     } else {
-      fileLoc = path.join("public", "uploads", folder, newFilename + "." + fileNameExt);
+      fileLoc = path.join(
+        "public",
+        "uploads",
+        folder,
+        newFilename + "." + fileNameExt
+      );
     }
     await fileData.mv(fileLoc);
     if (!folder) {

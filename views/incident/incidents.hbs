@@ -3,7 +3,7 @@
     <div class="row">
     <h4 class="fw-bold">Incidents</h4>
     </div>
-        <div class="row w-100 p-3 m-auto border shadow-sm rounded bg-white">
+        <div class="row w-100 p-3 m-auto border shadow-sm rounded bg-white bg-opacity-75">
 
       <div class="text-center my-3">
       <a href="/incident/create" class="btn btn-secondary bg-dark">Create new incident</a>
@@ -11,21 +11,23 @@
       {{! row w-100 p-3 m-auto border shadow-sm rounded bg-white row-cols-1 row-cols-md-2 }}
       {{#if incidents}}
         {{#each incidents}}
-          <div class="col-lg-4 col-md-6 my-3 g-3">
+          <div class="col-lg-4 col-md-6 my-3 mx-auto g-3">
           <div class="card h-100 text-start">
             <div class="card-body">
-              <h5 class="fw-bold"><a href="/property/{{_id}}">{{subject}}</a></h5>
-              <p class="fs-6"><small>RefID. {{property}}</small></p>
+              <h5 class="fw-bold"><a href="/incident/{{_id}}">{{subject}}</a></h5>
+              {{#with property}}
+              <p class="fs-6"><small>{{this.propertyType}}</small></p>
+              {{/with}}
               <p class="card-text">{{description}}</p>
             </div>
             <div class="card-footer">
-              <small class="text-muted">{{#if status }}Solved{{else}}To solve{{/if}}</small>
+              <small class="text-muted">{{#if status }}Solved{{else}}Pending{{/if}}</small>
             </div>
           </div>        
         </div>
         {{/each}}
       {{else}}
-        <h4 class="fw-bold p-5 text-center"> You don't have any incident.</h4>
+        <h4 class="fw-bold p-5 text-center text-muted"> You don't have any incident.</h4>
       {{/if}}
     </div>
   </div>

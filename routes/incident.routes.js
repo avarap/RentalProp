@@ -65,7 +65,7 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.get("/:id/delete", isLoggedIn, (req, res, next) => {
+router.get("/delete/:id", isLoggedIn, (req, res, next) => {
   const id = req.params.id;
 
   Incident.findByIdAndRemove(id)
@@ -75,7 +75,8 @@ router.get("/:id/delete", isLoggedIn, (req, res, next) => {
           message: `Cannot delete Incident with id=${id}. Maybe Incident was not found!`,
         });
       } else {
-        res.send({ message: "Incident was deleted successfully!" });
+        // res.send({ message: "Incident was deleted successfully!" });
+        res.redirect(redirectPath);
       }
     })
     .catch((err) => {
