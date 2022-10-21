@@ -22,7 +22,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
       { rented: -1 }
     );
     //Property.count(data);
-    if (userData.role === "Owner") {
+    if (userData.role === "owner") {
       res.render(templatePath + "/properties", {
         properties: data,
         userInSession: userData,
@@ -81,7 +81,6 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
       });
     }
     console.log(err);
-    //console.log(req.body);
   }
 });
 
