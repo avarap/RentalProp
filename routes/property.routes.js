@@ -22,7 +22,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
       { rented: -1 }
     );
     //Property.count(data);
-    if (userData.role === "owner") {
+    if (userData.role === "Owner") {
       res.render(templatePath + "/properties", {
         properties: data,
         userInSession: userData,
