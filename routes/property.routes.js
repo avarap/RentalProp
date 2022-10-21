@@ -85,7 +85,7 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.get("/:id/delete", isLoggedIn, (req, res, next) => {
+router.get("/delete/:id", isLoggedIn, (req, res, next) => {
   const id = req.params.id;
 
   Property.findByIdAndRemove(id)
@@ -95,7 +95,8 @@ router.get("/:id/delete", isLoggedIn, (req, res, next) => {
           message: `Cannot delete Property with id=${id}. Maybe Property was not found!`,
         });
       } else {
-        res.send({ message: "Property was deleted successfully!" });
+        // res.send({ message: "Property was deleted successfully!" });
+        res.redirect(redirectPath);
       }
     })
     .catch((err) => {

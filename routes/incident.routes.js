@@ -16,17 +16,20 @@ let errorRender = "error";
 router.get("/", isLoggedIn, async (req, res, next) => {
   try {
     const data = await Incident.find({ Owner: req.user._id });
+    const properties = await Property.findOne({ Owner: req.user._id });
 
     if (req.user.role === "owner") {
       res.render(templatePath + "/incidents", {
         incidents: data,
         userInSession: req.user,
+        properties,
       });
       return;
     } else {
       res.render(templatePath + "/incidents", {
         incidents: data,
         userInSession: req.user,
+        properties,
       });
     }
   } catch (err) {
