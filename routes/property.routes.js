@@ -61,7 +61,7 @@ router.get("/create", isLoggedIn, async (req, res, next) => {
 router.post(
   "/create",
   isLoggedIn,
-  fileUploader.single("property-image"),
+  //   fileUploader.single("property-image"),
   async (req, res, next) => {
     try {
       const data = new Property();
@@ -74,7 +74,7 @@ router.post(
       data.sizeM2 = req.body.sizeM2;
       data.roomNumber = req.body.roomNumber;
       data.price = req.body.price;
-      data.imageUrl = req.file.path;
+//       data.imageUrl = req.file.path;
 
       if (!req.body.rented) data.rented = false;
       else data.rented = true;
