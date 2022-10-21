@@ -3,7 +3,9 @@
     <div class="row">
       <h4 class="col fw-bold">Properties</h4>
     </div>
-    <div class="row w-100 p-3 m-auto border shadow-sm rounded bg-white bg-opacity-75">
+    <div
+      class="row w-100 p-3 m-auto border shadow-sm rounded bg-white bg-opacity-75"
+    >
       <div class="text-center my-3">
         <a href="/property/create" class="btn btn-secondary bg-dark">Add new
           property</a>
@@ -13,17 +15,12 @@
         {{#each properties}}
           <div class="col-lg-4 col-md-6 my-3 mx-auto g-3">
             <div class="card h-100 text-start">
-              {{#if gallery.[0]}}
-                <a href="/property/{{_id}}">
-                  <img
-                    src="/uploads/{{gallery.[0]}}"
-                    class="card-img-top"
-                    alt="{{referenceID}}"
-                  /></a>
-              {{/if}}
+              {{#if imageUrl}}
+              <img src="{{imageUrl}}" class="card-img-top" alt="" />     
+              {{/if}}     
               <div class="card-body">
                 <a href="/property/{{_id}}">
-                <h5 class="fw-bold">{{propertyType}}</h5>
+                  <h5 class="fw-bold">{{propertyType}}</h5>
                 </a>
                 <p class="fs-6"><small>RefID. {{referenceID}}</small></p>
                 <p class="card-text">{{description}}</p>
