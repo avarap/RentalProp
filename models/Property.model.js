@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { stringify } = require("uuid");
 // const autoIncrement = require("mongoose-auto-increment");
 
 const propertySchema = new mongoose.Schema(
@@ -19,8 +18,7 @@ const propertySchema = new mongoose.Schema(
     roomNumber: Number,
     price: Number,
     rented: Boolean,
-    // gallery: String,
-    imageUrl: String,
+    gallery: [String],
     Owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   {
