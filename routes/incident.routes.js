@@ -36,7 +36,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
 });
 
 router.get("/create", isLoggedIn, async (req, res, next) => {
-  const properties = await Property.findOne({ Owner: req.user._id });
+  const properties = await Property.find({ Owner: req.user._id });
   res.render(templatePath + "/create", { userInSession: req.user, properties });
 });
 
@@ -110,6 +110,7 @@ router.post("/:id", isLoggedIn, async (req, res, next) => {
       Owner: req.user._id,
       _id: req.params.id,
     });
+
     data.subject = req.body.subject;
     data.description = req.body.description;
     data.status = req.body.status;
