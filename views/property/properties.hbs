@@ -15,7 +15,9 @@
         {{#each properties}}
           <div class="col-lg-4 col-md-6 my-3 mx-auto g-3">
             <div class="card h-100 text-start">
-              <img src="{{imageUrl}}" class="card-img-top" alt="" />          
+              {{#if imageUrl}}
+              <img src="{{imageUrl}}" class="card-img-top" alt="" />     
+              {{/if}}     
               <div class="card-body">
                 <a href="/property/{{_id}}">
                   <h5 class="fw-bold">{{propertyType}}</h5>

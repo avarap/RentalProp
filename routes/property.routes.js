@@ -89,7 +89,6 @@ router.post(
       data.Tenant = req.body.Tenant;
 
       await data.save();
-      console.log(data);
       return res.redirect(redirectPath);
     } catch (err) {
       if (err.code === 11000) {
@@ -147,6 +146,7 @@ router.post(
   fileUploader.single("property-image"),
   async (req, res, next) => {
     try {
+      const existingImage = req.body.existingImage;
       const data = await Property.findOne({
         Owner: req.user._id,
         _id: req.params.id,
@@ -162,10 +162,17 @@ router.post(
       data.roomNumber = req.body.roomNumber;
       data.price = req.body.price;
       data.Tenant = req.body.Tenant;
-      data.imageUrl = req.file.path;
+      data.imageUrl = req.body.existingImage;
 
       if (!req.body.rented) data.rented = false;
       else data.rented = true;
+
+      // let imageUrl;
+      if (req.file) {
+        data.imageUrl = req.file.path;
+      } else {
+        data.imageUrl = existingImage;
+      }
 
       // if (req.files) {
       //   let fileU = await fileUpload(req.files.gallery, req.user._id);
