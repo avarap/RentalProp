@@ -162,7 +162,6 @@ router.post(
       data.roomNumber = req.body.roomNumber;
       data.price = req.body.price;
       data.Tenant = req.body.Tenant;
-      data.imageUrl = req.body.existingImage;
 
       if (!req.body.rented) data.rented = false;
       else data.rented = true;
