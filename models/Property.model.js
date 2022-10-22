@@ -18,7 +18,7 @@ const propertySchema = new mongoose.Schema(
     roomNumber: Number,
     price: Number,
     rented: Boolean,
-    gallery: [String],
+    gallery: String,
     Owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   {

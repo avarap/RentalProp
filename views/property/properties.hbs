@@ -13,10 +13,10 @@
         {{#each properties}}
           <div class="col-lg-4 col-md-6 my-3 mx-auto g-3">
             <div class="card h-100 text-start">
-              {{#if gallery.[0]}}
+              {{#if gallery}}
                 <a href="/property/{{_id}}">
                   <img
-                    src="/uploads/{{gallery.[0]}}"
+                    src="{{gallery}}"
                     class="card-img-top"
                     alt="{{referenceID}}"
                   /></a>
