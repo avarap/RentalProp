@@ -128,42 +128,56 @@ router.get("/:id", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post("/:id", isLoggedIn, async (req, res, next) => {
-  try {
-    const data = await Property.findOne({
-      Owner: req.user._id,
-      _id: req.params.id,
-    });
+router.post(
+  "/:id",
+  isLoggedIn,
+  fileUploader.single("gallery"),
+  async (req, res, next) => {
+    try {
+      const data = await Property.findOne({
+        Owner: req.user._id,
+        _id: req.params.id,
+      });
 
-    // data.propertyType = req.body.propertyType;
-    data.address.street = req.body.street;
-    data.address.zipCode = req.body.zipCode;
-    data.address.city = req.body.city;
-    data.description = req.body.description;
-    data.sizeM2 = req.body.sizeM2;
-    data.roomNumber = req.body.roomNumber;
-    data.price = req.body.price;
-    data.Tenant = req.body.Tenant;
+      const existingImage = req.body.existingImage;
 
-    if (!req.body.rented) data.rented = false;
-    else data.rented = true;
+      // data.propertyType = req.body.propertyType;
+      data.address.street = req.body.street;
+      data.address.zipCode = req.body.zipCode;
+      data.address.city = req.body.city;
+      data.description = req.body.description;
+      data.sizeM2 = req.body.sizeM2;
+      data.roomNumber = req.body.roomNumber;
+      data.price = req.body.price;
+      data.Tenant = req.body.Tenant;
+      data.gallery = req.body.gallery;
 
-    if (req.files) {
-      let fileU = await fileUpload(req.files.gallery, req.user._id);
-      data.gallery = [];
-      data.gallery.push(fileU);
+      if (!req.body.rented) data.rented = false;
+      else data.rented = true;
+
+      if (req.file) {
+        data.gallery = req.file.path;
+      } else {
+        data.gallery = existingImage;
+      }
+
+      // if (req.files) {
+      //   let fileU = await fileUpload(req.files.gallery, req.user._id);
+      //   data.gallery = [];
+      //   data.gallery.push(fileU);
+      // }
+
+      await data.save();
+
+      //await Property.updateOne({ Owner: req.user._id, _id: req.params.id }, data.toJSON());
+      res.redirect(redirectPath);
+
+      //res.render(templatePath + "/property-details", { property: data, userInSession: req.user });
+    } catch (err) {
+      console.log(err);
+      res.render(errorRender);
     }
-
-    await data.save();
-
-    //await Property.updateOne({ Owner: req.user._id, _id: req.params.id }, data.toJSON());
-    res.redirect(redirectPath);
-
-    //res.render(templatePath + "/property-details", { property: data, userInSession: req.user });
-  } catch (err) {
-    console.log(err);
-    res.render(errorRender);
   }
-});
+);
 
 module.exports = router;
