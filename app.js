@@ -19,12 +19,22 @@ hbs.registerHelper("log", function (something) {
 });
 
 hbs.registerHelper("isIncluded", function (val1, val2) {
+  console.log(val1, val2);
+  console.log(typeof val1, typeof val2);
   const newVal1 = val1.toString();
   const newVal2 = val2.map((val) => val.toString());
   if (newVal2.indexOf(newVal1) > -1) {
     return true;
   }
   return false;
+});
+
+hbs.registerHelper("isEqual", function (val1, val2) {
+  console.log(val1, val2);
+  console.log(typeof val1, typeof val2);
+  const newVal1 = val1.toString();
+  const newVal2 = val2.toString();
+  return newVal1 === newVal2;
 });
 
 hbs.registerPartials(path.join(__dirname, "views/partials"));
@@ -34,8 +44,8 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
-const fileUpload = require("express-fileupload");
-app.use(fileUpload({ createParentPath: true }));
+// const fileUpload = require("express-fileupload");
+// app.use(fileUpload({ createParentPath: true }));
 
 const capitalized = require("./utils/capitalized");
 const projectName = "rentalProp";

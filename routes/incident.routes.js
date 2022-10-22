@@ -7,7 +7,10 @@ const Incident = require("../models/Incident.model");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-const fileUpload = require("../utils/fileUpload");
+const multer = require("multer");
+
+// const fileUpload = require("../utils/fileUpload");
+// const fileUploader = require("../config/cloudinary.config");
 
 let templatePath = "./incident";
 let redirectPath = "/incident";
@@ -16,20 +19,18 @@ let errorRender = "error";
 router.get("/", isLoggedIn, async (req, res, next) => {
   try {
     const data = await Incident.find({ Owner: req.user._id });
-    const properties = await Property.findOne({ Owner: req.user._id });
+    // await data.populate("property");
 
     if (req.user.role === "owner") {
       res.render(templatePath + "/incidents", {
         incidents: data,
         userInSession: req.user,
-        properties,
       });
       return;
     } else {
       res.render(templatePath + "/incidents", {
         incidents: data,
         userInSession: req.user,
-        properties,
       });
     }
   } catch (err) {
@@ -43,7 +44,7 @@ router.get("/create", isLoggedIn, async (req, res, next) => {
   res.render(templatePath + "/create", { userInSession: req.user, properties });
 });
 
-router.post("/create", isLoggedIn, async (req, res, next) => {
+router.post("/create", isLoggedIn, multer().none(), async (req, res, next) => {
   try {
     /* 
  subject,description, status,
@@ -95,19 +96,22 @@ router.get("/:id", isLoggedIn, async (req, res, next) => {
       Owner: req.user._id,
       _id: req.params.id,
     });
+    await data.populate("property");
+
     const properties = await Property.find({ Owner: req.user._id });
 
     res.render(templatePath + "/incident-details", {
-      Incident: data,
+      incident: data,
       userInSession: req.user,
       properties,
     });
   } catch (err) {
+    console.log(err);
     res.render(errorRender);
   }
 });
 
-router.post("/:id", isLoggedIn, async (req, res, next) => {
+router.post("/:id", isLoggedIn, multer().none(), async (req, res, next) => {
   try {
     const data = await Incident.findOne({
       Owner: req.user._id,
@@ -117,7 +121,7 @@ router.post("/:id", isLoggedIn, async (req, res, next) => {
     data.subject = req.body.subject;
     data.description = req.body.description;
     data.status = req.body.status;
-    data.property = req.body.property;
+    // data.property = req.body.property;
 
     await data.save();
     return res.redirect(redirectPath);
