@@ -1,0 +1,31 @@
+{{! email,firstName,lastName,pictureProfile,phone,idcard }}
+
+<div class="col-lg-2">
+  <label><span class="hint-text">First Name*</span></label>
+  <input type="text" class="form-control" name="firstName" value="{{firstName}}" placeholder="First name" required />
+</div>
+
+<div class="col-lg-2">
+  <label class="hint-text"><span>Last Name*</span></label>
+  <input type="text" class="form-control" name="lastName" value="{{lastName}}" placeholder="Last name" required />
+</div>
+
+<div class="col-lg-4">
+  <label class="hint-text"><span>Email*</span></label>
+  <input type="email" class="form-control" name="email" value="{{email}}" placeholder="Email" required  />
+</div>
+
+<div class="col-lg-2">
+  <label class="hint-text"><span>Phone number</span></label>
+  <input type="phone" class="form-control" name="phone" value="{{phone}}" placeholder="Phone number" />
+</div>
+
+<div class="col-lg-2">
+  <label class="hint-text"><span>ID card/Passport</span></label>
+  <input type="text" class="form-control" name="idcard" value="{{idcard}}" placeholder="idcard" />
+</div>
+
+<div class="col-lg-12 col-md-12">
+  <label for="pictureProfile"><span class="hint-text">Photo</span></label>
+  <input type="file" class="form-control" name="pictureProfile" {{#if pictureProfile}} value="{{pictureProfile}}" {{/if}}/>
+</div>

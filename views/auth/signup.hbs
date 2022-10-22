@@ -1,0 +1,50 @@
+<main class="form-signin w-100 m-auto">
+  <div class="text-center mb-5">
+    <img
+      class="mx-auto d-block logo"
+      src="/images/logo-transparent.png"
+      alt="house logo"
+    />
+    <h1>{{appTitle}}</h1>
+  </div>
+  <h2 class="fw-bold">Welcome!</h2>
+  <h5>Register your account</h5>
+
+  <form action="/auth/signup" method="POST">
+
+    <input
+      type="email"
+      class="form-control"
+      name="username"
+      placeholder="Email"
+      required
+    />
+
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      placeholder="Password"
+      required
+    />
+
+    {{#if errorMessage}}
+      <div class="error">
+        {{errorMessage}}
+      </div>
+    {{/if}}
+
+    <button
+      type="submit"
+      class="w-100 btn btn-lg fw-bold border-dark bg-white mt-5"
+    >Sign Up</button>
+  </form>
+
+</main>
+
+<div>
+  <p><small>Already have an account?
+      <br />
+      <a href="/">Please Login</a>
+    </small></p>
+</div>

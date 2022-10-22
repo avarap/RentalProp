@@ -1,0 +1,42 @@
+<main class="w-100 m-auto">
+  <div class="container p-4 text-start">
+    <div class="row">
+      <h4 class="col fw-bold">Properties</h4>
+    </div>
+    <div class="row w-100 p-3 m-auto border shadow-sm rounded bg-white bg-opacity-75">
+      <div class="text-center my-3">
+        <a href="/property/create" class="btn btn-secondary bg-dark">Add new
+          property</a>
+      </div>
+      {{! row w-100 p-3 m-auto border shadow-sm rounded bg-white row-cols-1 row-cols-md-2 }}
+      {{#if properties}}
+        {{#each properties}}
+          <div class="col-lg-4 col-md-6 my-3 mx-auto g-3">
+            <div class="card h-100 text-start">
+              {{#if gallery}}
+                <a href="/property/{{_id}}">
+                  <img
+                    src="{{gallery}}"
+                    class="card-img-top"
+                    alt="{{referenceID}}"
+                  /></a>
+              {{/if}}
+              <div class="card-body">
+                <a href="/property/{{_id}}">
+                <h5 class="fw-bold">{{propertyType}}</h5>
+                </a>
+                <p class="fs-6"><small>RefID. {{referenceID}}</small></p>
+                <p class="card-text">{{description}}</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">{{#if rented}}Rented{{else}}Not Rented{{/if}}</small>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      {{else}}
+        <h4 class="p-5 text-center text-muted">You don't have any property.</h4>
+      {{/if}}
+    </div>
+  </div>
+</main>

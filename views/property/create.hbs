@@ -1,0 +1,94 @@
+<main class="w-100 m-auto">
+  <div class="container text-start">
+
+    <h4 class="fw-bold">Add new property</h4>
+    <div class="container p-5 border shadow-sm rounded bg-white bg-opacity-75 m-auto text-start">
+
+      <form class="row row-cols-lg-auto g-3 align-items-center" action="/property/create" method="POST" enctype="multipart/form-data">
+
+        <div class="col-lg-2 col-md-6">
+          <label for="referenceID ">
+            <span class="hint-text">ReferenceID*</span>
+          </label>
+          <input type="text" class="form-control" name="referenceID" placeholder="E.g. 368" required />
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <label for="propertyType">
+            <span class="hint-text">Property type*</span>
+          </label>
+          <select name="propertyType" class="form-select" required>
+            <option value="Apartment" selected>Apartment</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Garage">Garage</option>
+            <option value="MobileHome">Mobile Home</option>
+            <option value="Office">Office</option>
+            <option value="ParkingSpace">Parking Space</option>
+            <option value="Room">Room</option>
+            <option value="Storage">Storage</option>
+          </select>
+        </div>
+
+        <div class="col-lg-4">
+          <label for="street">
+            <span class="hint-text">Street</span>
+          </label>
+          <input type="text" class="form-control" name="street" placeholder="1234 Main St" />
+        </div>
+        <div class="col-lg-2">
+          <label for="zipCode">
+            <span class="hint-text">Zip code</span>
+          </label>
+          <input type="text" class="form-control" name="zipCode" placeholder="14925"/>
+        </div>
+        <div class="col-lg-2">
+          <label for="city">
+            <span class="hint-text">City</span>
+          </label>
+          <input type="text" class="form-control" name="city" placeholder="New York"/>
+        </div>
+
+        <div class="col-lg-12">
+          <label for="description"><span class="hint-text">Description</span></label>
+          <textarea type="text" class="form-control" name="description" rows="6"></textarea>
+        </div>
+
+        <div class="col-lg-1 col-md-4 col-sm-4">
+          <label for="sizeM2"><span class="hint-text">Size (m²)</span></label>
+          <input type="number" class="form-control" name="sizeM2" min="0" placeholder="90" />
+        </div>
+
+        <div class="col-lg-1 col-md-4 col-sm-4">
+          <label for="roomNumber"><span class="hint-text">Rooms</span></label>
+          <input type="number" class="form-control" name="roomNumber" min="0" placeholder="3" />
+        </div>
+
+        <div class="col-lg-1 col-md-4 col-sm-4">
+          <label for="price"><span class="hint-text">Price</span></label>
+          <input type="number" class="form-control" name="price" min="0" placeholder="900" />
+        </div>
+
+        <div class="col-lg-9 col-md-12">
+          <label for="gallery"><span class="hint-text">Gallery</span></label>
+          <input type="file" class="form-control" name="gallery" />
+        </div>
+
+        {{! when is selected has property checked }}
+        <div class="col-lg-12 col-md-12">
+          <label for="rented"><span class="hint-text">Rented</span></label>
+          <div>
+            <input type="checkbox" class="form-check-input my-2" id="rented" name="rented" value="true" />
+          </div>
+        </div>
+
+        {{! <label for="Owner">Owner</label><input type="text" name="Owner" /> }}
+        {{! <label for="Tenant">Tenant</label><input type="text" name="Tenant" /> }}
+        <div>
+          <input class="col btn border-dark bg-white" type="reset" value="Reset fields" />
+          <button class="col btn btn-secondary border-dark bg-dark" type="submit">Create</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</main>

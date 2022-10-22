@@ -1,0 +1,79 @@
+<main class="w-100 m-auto">
+  <div class="container text-start">
+
+    <h4 class="fw-bold">Create incident</h4>
+    <div
+      class="container p-5 border shadow-sm rounded bg-white bg-opacity-75 m-auto text-start"
+    >
+
+      <form
+        class="row row-cols-lg-auto g-3 align-items-center"
+        action="/incident/create"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+
+        <div class="col-lg-6">
+          <label>
+            <span class="hint-text">Select Property*</span>
+          </label>
+          <select name="property" class="form-select" required>
+              {{#each properties}}
+                <option value="{{_id}}">{{propertyType}} {{referenceID}}</option>
+              {{/each}} 
+          </select>
+        </div>
+
+        <div class="col-lg-6 md-12">
+          <label for="propertyType">
+            <span class="hint-text">Incident type*</span>
+          </label>
+          <select name="subject" class="form-select" aria-placeholder="Select incident type" required>
+            <option value="Appliances">Appliances</option>
+            <option value="Building">Building</option>
+            <option value="Cleaning">Cleaning</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Gardening">Gardening</option>
+            <option value="Gas">Gas</option>
+            <option value="Internet">Internet</option>
+            <option value="Water">Water</option>
+            <option value="Other">Villa</option>
+          </select>
+        </div>
+
+                <div class="col-lg-3 col-md-6">
+                  <select class="form-control" name="status" hidden>
+                    <option value="Pending" selected>Pending</option>
+                    <option value="In Progress">In progress</option>
+                    <option value="Finalized">Finalized</option>
+                  </select>
+                </div>
+
+        <div class="col-lg-12">
+          <label for="description"><span
+              class="hint-text"
+            >Description</span></label>
+          <textarea
+            type="text"
+            class="form-control"
+            name="description"
+            rows="6"
+          ></textarea>
+        </div>
+
+        <div>
+          <input
+            class="col btn border-dark bg-white"
+            type="reset"
+            value="Reset fields"
+          />
+          <button
+            class="col btn btn-secondary border-dark bg-dark"
+            type="submit"
+          >Create</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</main>
