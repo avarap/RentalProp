@@ -14,8 +14,7 @@
           <select name="property" class="form-select" multiple>
             <option value="">&nbsp;</option>
               {{#each ../properties}}
-                {{log this._id}}
-                <option value="{{this._id}}" {{#if (isIncluded this._id @root.tenant.property)}} selected="selected" {{/if}} >{{this.referenceID}}</option>
+                <option value="{{this._id}}" {{#if (isEqual this._id @root.tenant.property)}} selected="selected" {{/if}} >{{this.referenceID}}</option>
               {{/each}} 
           </select>
       </div>
