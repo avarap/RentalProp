@@ -30,8 +30,8 @@ hbs.registerHelper("isIncluded", function (val1, val2) {
 });
 
 hbs.registerHelper("isEqual", function (val1, val2) {
-  console.log(val1, val2);
-  console.log(typeof val1, typeof val2);
+  // console.log(val1, val2);
+  // console.log(typeof val1, typeof val2);
   const newVal1 = val1.toString();
   const newVal2 = val2.toString();
   return newVal1 === newVal2;
