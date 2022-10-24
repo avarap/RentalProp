@@ -7,7 +7,8 @@ const Tenant = require("../models/Tenant.model");
 // const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-const fileUpload = require("../utils/fileUpload");
+// const fileUpload = require("../utils/fileUpload");
+const fileUploader = require("../config/cloudinary.config");
 
 let templatePath = "./tenant";
 let redirectPath = "/tenant";
@@ -52,33 +53,40 @@ router.get("/create", isLoggedIn, async (req, res, next) => {
   res.render(templatePath + "/create", { userInSession: req.user, properties });
 });
 
-router.post("/create", isLoggedIn, async (req, res, next) => {
-  try {
-    const data = new Tenant();
-    data.email = req.body.email;
-    data.firstName = req.body.firstName;
-    data.lastName = req.body.lastName;
-    data.phone = req.body.phone;
-    data.idcard = req.body.idcard;
-    data.owner = req.user._id;
+router.post(
+  "/create",
+  isLoggedIn,
+  fileUploader.single("pictureProfile"),
+  async (req, res, next) => {
+    console.log(req.file);
+    try {
+      const data = new Tenant();
+      data.email = req.body.email;
+      data.firstName = req.body.firstName;
+      data.lastName = req.body.lastName;
+      data.phone = req.body.phone;
+      data.idcard = req.body.idcard;
+      data.owner = req.user._id;
+      data.pictureProfile = req.file.path;
 
-    if (req.files) {
-      let fileU = await fileUpload(req.files.pictureProfile, req.user._id);
-      data.pictureProfile = fileU;
+      // if (req.files) {
+      //   let fileU = await fileUpload(req.files.pictureProfile, req.user._id);
+      //   data.pictureProfile = fileU;
+      // }
+
+      data.property = req.body.property;
+
+      await data.save();
+      return res.redirect(redirectPath);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).render("tenant/create", {
+        userInSession: req.user,
+        errorMessage: "There was an error.",
+      });
     }
-
-    data.property = req.body.property;
-
-    await data.save();
-    return res.redirect(redirectPath);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).render("tenant/create", {
-      userInSession: req.user,
-      errorMessage: "There was an error.",
-    });
   }
-});
+);
 
 router.get("/delete/:id", isLoggedIn, (req, res, next) => {
   const id = req.params.id;
@@ -121,28 +129,43 @@ router.get("/:id", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post("/:id", isLoggedIn, async (req, res, next) => {
-  try {
-    const data = await Tenant.findOne({
-      Owner: req.user._id,
-      _id: req.params.id,
-    });
-    data.email = req.body.email;
-    data.firstName = req.body.firstName;
-    data.lastName = req.body.lastName;
-    data.phone = req.body.phone;
-    data.idcard = req.body.idcard;
-    data.owner = req.user._id;
-    if (req.files) {
-      let fileU = await fileUpload(req.files.pictureProfile, req.user._id);
-      data.pictureProfile = fileU;
+router.post(
+  "/:id",
+  isLoggedIn,
+  fileUploader.single("pictureProfile"),
+  async (req, res, next) => {
+    try {
+      const data = await Tenant.findOne({
+        Owner: req.user._id,
+        _id: req.params.id,
+      });
+      const existingImage = req.body.existingImage;
+
+      data.email = req.body.email;
+      data.firstName = req.body.firstName;
+      data.lastName = req.body.lastName;
+      data.phone = req.body.phone;
+      data.idcard = req.body.idcard;
+      data.owner = req.user._id;
+      data.pictureProfile = req.body.pictureProfile;
+
+      if (req.file) {
+        data.pictureProfile = req.file.path;
+      } else {
+        data.pictureProfile = existingImage;
+      }
+
+      // if (req.files) {
+      //   let fileU = await fileUpload(req.files.pictureProfile, req.user._id);
+      //   data.pictureProfile = fileU;
+      // }
+      await data.save();
+      return res.redirect(redirectPath);
+    } catch (err) {
+      console.log(err);
+      res.render(errorRender);
     }
-    await data.save();
-    return res.redirect(redirectPath);
-  } catch (err) {
-    console.log(err);
-    res.render(errorRender);
   }
-});
+);
 
 module.exports = router;
