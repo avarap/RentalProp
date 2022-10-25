@@ -8,3 +8,6 @@ This is simple property rental management.
 In this app it’s possible to sign up and login as a property owner, create, update and delete properties. Register, delete tenants, add new incidents, consult them and update their status.
 
 Ironhack PT WebDev 2nd project by Antonio Piquer & João Serafim in October 2022.
+
+Link to the app:
+https://rentalprop.cyclic.app/
